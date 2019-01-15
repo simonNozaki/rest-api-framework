@@ -7,6 +7,16 @@ import java.util.List;
  */
 public class Errors {
 
+    public Errors() {}
+
+    /**
+     * デフォルトコンストラクタ。
+     * @param codes
+     */
+    public Errors(List<String> codes) {
+        this.codes = codes;
+    }
+
 	/**
 	 * エラーコードリスト
 	 */
