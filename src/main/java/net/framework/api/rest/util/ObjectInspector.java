@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.framework.api.rest.Errors;
 import net.framework.api.rest.config.AppLogger;
+import net.framework.api.rest.consts.AppConst;
 
 /**
  * オブジェクト検査クラス。
@@ -65,14 +66,20 @@ public class ObjectInspector<T> {
 
         /**
          * {@code of}メソッドで初期化した検査対象をJSON形式でログ出力します。
+         * JSONシリアライズに失敗等システムエラーが発生した場合、パイプラインを継続しつつログ出力します。
          * @param code ログに出すコード
          * @param message ログメッセージ
          * @return {@code Inspector}
          * @throws Exception
          */
-        public <V> Inspector<T> log(String code, String message) throws Exception {
-            AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(this.value));
-            return new Inspector<T>(value);
+        public <V> Inspector<T> log(String code, String message){
+            try{
+                AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(this.value));
+                return new Inspector<T>(value);
+            }catch(Exception e){
+                AppLogger.error(null, AppConst.SYSTEM_ERROR, e, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName());
+                return new Inspector<T>(value);
+            }
         }
 
         /**
