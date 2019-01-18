@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="rest-api-framework">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/build/libs/rest-api-framework.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
