@@ -1,15 +1,15 @@
 buildscript {
-	ext {
-		springBootVersion = '1.5.15.RELEASE'
-		mybatisGeneratorVersion = '1.3.5'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath 'postgresql:postgresql:9.1-901.jdbc4'
-	}
+    ext {
+        springBootVersion = '1.5.15.RELEASE'
+        mybatisGeneratorVersion = '1.3.5'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'postgresql:postgresql:9.1-901.jdbc4'
+    }
 }
 
 /*
@@ -35,13 +35,13 @@ repositories {
 // In this section you declare the dependencies for your production and test code
 dependencies {
     /**
-    * Logback
-    */
+     * Logback
+     */
     compile 'ch.qos.logback:logback-classic:1.2.3'
 
     /**
-    * jackson
-    */
+     * jackson
+     */
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.7'
 
@@ -53,4 +53,8 @@ dependencies {
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
     // 'test.useTestNG()' to your build script.
     testCompile 'junit:junit:4.12'
+}
+
+task printStdOut {
+
 }

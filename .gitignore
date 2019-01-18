@@ -3,3 +3,7 @@
 .project
 
 src/main/main.iml
+
+/bin/**
+
+/.gradle
