@@ -5,6 +5,7 @@ import net.framework.api.rest.config.AppLogger;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -73,6 +74,9 @@ public class RestControllerHelper<T> {
          * @return ResponseProcessor 結果を入力にしたプロセッサ
          */
         public <R> ResponseProcessor<R> executeService(ServiceOut<R> out) {
+            Optional.ofNullable(out.getErrors()).ifPresent((Errors serviceOutErrors) -> {
+                this.errors.getCodes().addAll(serviceOutErrors.getCodes());
+            });
             return new ResponseProcessor<R>(out.getValue(), out.getErrors());
         }
 
@@ -86,7 +90,7 @@ public class RestControllerHelper<T> {
         }
 
         /**
-         *
+         * サービスクラスの結果を別のオブジェクトにマップします。
          * @param bifunction
          * @return
          */

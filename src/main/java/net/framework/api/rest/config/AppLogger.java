@@ -21,19 +21,6 @@ import net.framework.api.rest.consts.LoggerConst;
  */
 public class AppLogger {
 
-    // MDCキーの定数
-    private static final String CLASS_NAME = "className";
-    private static final String METHOD_NAME = "methodName";
-    private static final String LOG_CODE = "logCode";
-    private static final String LOG_MESSAGE = "logMessage";
-    private static final String JSON_BODY = "jsonBody";
-
-    // ロガー用定数
-    private static final String ERR_STACK_TRACE = "errStackTrace";
-    private static final String STACKTRACE_START = "[Telegram Trace Start]";
-    private static final String STACKTRACE_END = "[Telegram Trace End]";
-    private static final String STR_NEWLINE = "\n";
-
 	/**
 	 * ロガーインスタンス、トレースログ用
 	 */
@@ -47,7 +34,7 @@ public class AppLogger {
 	/**
 	 * ロガーインスタンス、エラーログ用
 	 */
-	private static final Logger appErrorrINSTANCE = LoggerFactory.getLogger(AppErrorLogger.class.getCanonicalName());
+	private static final Logger appErrorINSTANCE = LoggerFactory.getLogger(AppErrorLogger.class.getCanonicalName());
 
 	/**
 	 * ログレベルに応じたログ出力を実施します。<br>
@@ -61,12 +48,12 @@ public class AppLogger {
 	 */
 	private static void log(String level, String code, String message, Throwable th, Object className, Object methodName) {
 	    // MDCを初期化
-	    MDC.put(CLASS_NAME, className.toString());
-	    MDC.put(METHOD_NAME, methodName.toString());
-	    MDC.put(LOG_CODE, code);
-	    MDC.put(LOG_MESSAGE, message);
+	    MDC.put(LoggerConst.CLASS_NAME, className.toString());
+	    MDC.put(LoggerConst.METHOD_NAME, methodName.toString());
+	    MDC.put(LoggerConst.LOG_CODE, code);
+	    MDC.put(LoggerConst.LOG_MESSAGE, message);
 	    if (th != null) {
-	        MDC.put(ERR_STACK_TRACE, getStackTraceString(th));
+	        MDC.put(LoggerConst.ERR_STACK_TRACE, getStackTraceString(th));
 	    }
 
 	    // マーカーを初期化
@@ -77,18 +64,20 @@ public class AppLogger {
 
 	    // ログレベルをロガーに入力
 	    ch.qos.logback.classic.Logger loggerInstance = (ch.qos.logback.classic.Logger)appTraceINSTANCE;
+		ch.qos.logback.classic.Logger errorLoggerInstance = (ch.qos.logback.classic.Logger)appErrorINSTANCE;
 
-	    // レベル別にログを出力
+
+		// レベル別にログを出力
 	    switch(level) {
 	        case LoggerConst.LOG_LEVEL_ERROR:
 	            loggerInstance.setLevel(Level.ERROR);
 	            logPrefix = MarkerFactory.getMarker(LoggerConst.LOG_PREFIX_ERROR);
-	            appTraceINSTANCE.error(logPrefix, code, exception);
+				appErrorINSTANCE.error(logPrefix, code, exception);
 	            break;
 	        case LoggerConst.LOG_LEVEL_WARN:
 	            loggerInstance.setLevel(Level.WARN);
 	            logPrefix = MarkerFactory.getMarker(LoggerConst.LOG_PREFIX_WARN);
-	            appTraceINSTANCE.error(logPrefix, code, exception);
+	            appTraceINSTANCE.warn(logPrefix, code, exception);
                 break;
 	        case LoggerConst.LOG_LEVEL_INFO:
                 loggerInstance.setLevel(Level.INFO);
@@ -118,29 +107,30 @@ public class AppLogger {
 	 */
 	private static void logTelegram(String level, String code, String message, Object className, Object methodName, String body) {
 	    // MDCを初期化
-        MDC.put(CLASS_NAME, className.toString());
-        MDC.put(METHOD_NAME, methodName.toString());
-        MDC.put(LOG_CODE, code);
-        MDC.put(LOG_MESSAGE, message);
-        MDC.put(JSON_BODY, getStackTraceString(body));
+        MDC.put(LoggerConst.CLASS_NAME, className.toString());
+        MDC.put(LoggerConst.METHOD_NAME, methodName.toString());
+        MDC.put(LoggerConst.LOG_CODE, code);
+        MDC.put(LoggerConst.LOG_MESSAGE, message);
+        MDC.put(LoggerConst.JSON_BODY, getStackTraceString(body));
 
         // マーカーを初期化
         Marker logPrefix;
 
         // ログレベルをロガーに入力
         ch.qos.logback.classic.Logger loggerInstance = (ch.qos.logback.classic.Logger)appTelegramINSTANCE;
+		ch.qos.logback.classic.Logger errorLoggerInstance = (ch.qos.logback.classic.Logger)appErrorINSTANCE;
 
         // レベル別にログを出力
         switch(level) {
             case LoggerConst.LOG_LEVEL_ERROR:
                 loggerInstance.setLevel(Level.ERROR);
                 logPrefix = MarkerFactory.getMarker(LoggerConst.LOG_PREFIX_ERROR);
-                appTelegramINSTANCE.error(logPrefix, code);
+				appErrorINSTANCE.error(logPrefix, code);
                 break;
             case LoggerConst.LOG_LEVEL_WARN:
                 loggerInstance.setLevel(Level.WARN);
                 logPrefix = MarkerFactory.getMarker(LoggerConst.LOG_PREFIX_WARN);
-                appTelegramINSTANCE.error(logPrefix, code);
+                appTelegramINSTANCE.warn(logPrefix, code);
                 break;
             case LoggerConst.LOG_LEVEL_INFO:
                 loggerInstance.setLevel(Level.INFO);
@@ -199,12 +189,12 @@ public class AppLogger {
 	 * スレッドローカルなMDCのキー情報をクリアします。
 	 */
 	private static void clearLocalMDC() {
-	    MDC.remove(CLASS_NAME);
-	    MDC.remove(METHOD_NAME);
-	    MDC.remove(LOG_CODE);
-	    MDC.remove(LOG_MESSAGE);
-	    if (MDC.get(ERR_STACK_TRACE) != null) {
-	        MDC.remove(ERR_STACK_TRACE);
+	    MDC.remove(LoggerConst.CLASS_NAME);
+	    MDC.remove(LoggerConst.METHOD_NAME);
+	    MDC.remove(LoggerConst.LOG_CODE);
+	    MDC.remove(LoggerConst.LOG_MESSAGE);
+	    if (MDC.get(LoggerConst.ERR_STACK_TRACE) != null) {
+	        MDC.remove(LoggerConst.ERR_STACK_TRACE);
 	    }
 	}
 
@@ -215,14 +205,14 @@ public class AppLogger {
 	 */
 	private static String getStackTraceString(Throwable excp) {
         StringBuilder sb = new StringBuilder();
-        sb.append(STR_NEWLINE);
-        sb.append(STACKTRACE_START);
-        sb.append(STR_NEWLINE);
+        sb.append(LoggerConst.STR_NEWLINE);
+        sb.append(LoggerConst.STACKTRACE_START);
+        sb.append(LoggerConst.STR_NEWLINE);
         StringWriter stringWriter = new StringWriter();
         excp.printStackTrace(new PrintWriter(stringWriter));
         sb.append(stringWriter.toString());
-        sb.append(STR_NEWLINE);
-        sb.append(STACKTRACE_END);
+        sb.append(LoggerConst.STR_NEWLINE);
+        sb.append(LoggerConst.STACKTRACE_END);
 
         return sb.toString();
     }
@@ -238,12 +228,12 @@ public class AppLogger {
      */
     private static String getStackTraceString(String body) {
         StringBuilder sb = new StringBuilder();
-        sb.append(STR_NEWLINE);
-        sb.append(STACKTRACE_START);
-        sb.append(STR_NEWLINE);
+        sb.append(LoggerConst.STR_NEWLINE);
+        sb.append(LoggerConst.STACKTRACE_START);
+        sb.append(LoggerConst.STR_NEWLINE);
         sb.append(body);
-        sb.append(STR_NEWLINE);
-        sb.append(STACKTRACE_END);
+        sb.append(LoggerConst.STR_NEWLINE);
+        sb.append(LoggerConst.STACKTRACE_END);
 
         return sb.toString();
     }

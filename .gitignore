@@ -6,4 +6,6 @@ src/main/main.iml
 
 /bin/**
 
-/.gradle
+.gradle/
+
+.idea/

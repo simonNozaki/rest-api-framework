@@ -52,4 +52,59 @@ public class LoggerConst {
      */
     public static final String LOG_PREFIX_TRACE = "     ";
 
+
+    //------------------------------------
+    // MDCキー定数
+    //------------------------------------
+
+    /**
+     * クラス名
+     */
+    public static final String CLASS_NAME = "className";
+
+    /**
+     * メソッド名
+     */
+    public static final String METHOD_NAME = "methodName";
+
+    /**
+     * コード値
+     */
+    public static final String LOG_CODE = "logCode";
+
+    /**
+     * メッセージ
+     */
+    public static final String LOG_MESSAGE = "logMessage";
+
+    /**
+     * JSON出力内容
+     */
+    public static final String JSON_BODY = "jsonBody";
+
+    /**
+     * エラースタックトレース
+     */
+    public static final String ERR_STACK_TRACE = "errStackTrace";
+
+
+    //------------------------------------
+    // 出力文字列定数
+    //------------------------------------
+
+    /**
+     * 電文ログ、開始
+     */
+    public static final String STACKTRACE_START = "[Telegram Trace Start]";
+
+    /**
+     * 電文ログ、終了
+     */
+    public static final String STACKTRACE_END = "[Telegram Trace End]";
+
+    /**
+     * 改行コード
+     */
+    public static final String STR_NEWLINE = "\n";
+
 }
