@@ -53,9 +53,23 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 
+/**
+ * コンパイラーオプション
+ */
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions {
+        jvmTarget = "1.8"
+        verbose = true
+    }
 }
+
+/**
+ * Gradle wrapper定義タスク
+ */
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.10'
+}
+
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
