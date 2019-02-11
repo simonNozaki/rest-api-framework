@@ -1,13 +1,14 @@
 package net.framework.api.rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import net.framework.api.rest.util.ObjectInspector;
-import net.framework.api.rest.util.ObjectUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import net.framework.api.rest.util.ObjectInspector;
+import net.framework.api.rest.util.ObjectUtil;
 
 /**
  * 利用サンプルクラス
@@ -60,6 +61,8 @@ public class Main {
 				errors.add(instance);
 			});
 		}
+
+		// Client client = ClientBuilder.newClient();
 
 		// ストリームでまるっと処理
 		List<Errors> object = ObjectUtil.getStream(dataList)

@@ -4,6 +4,7 @@
     <conelement value="org.eclipse.buildship.core.gradleclasspathcontainer" />
     <src_description expected_position="0">
       <src_folder value="file://$MODULE_DIR$/src/main/java" expected_position="0" />
+      <src_folder value="file://$MODULE_DIR$/src/main/kotlin" expected_position="0" />
     </src_description>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
