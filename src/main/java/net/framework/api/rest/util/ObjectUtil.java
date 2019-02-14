@@ -3,6 +3,8 @@ package net.framework.api.rest.util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 /**
@@ -41,6 +43,21 @@ public class ObjectUtil {
 		}
 		return result;
 	}
+
+    /**
+     * 引数がURLの形式に則っていることを確認します。
+     * @param subject 検査対象パス
+     * @return 真偽値
+     */
+	public boolean isUri(String subject){
+	    String regex = "^(http|https)://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(subject);
+        if(!matcher.matches()){
+            return false;
+        }
+        return true;
+    }
 
 	/**
      * 任意の型のリストからStreamを返します.リストが空の場合、空のStreamを返却します。
