@@ -14,4 +14,9 @@ public class AppConst {
      */
     public static final String SYSTEM_ERROR = "処理中にシステムエラーが発生しました。";
 
+    /**
+     * APIのリクエスト実行時に例外が発生しました。
+     */
+    public static final String WEB_API_REQUEST_ERROR = "APIのリクエスト実行時に例外が発生しました。";
+
 }

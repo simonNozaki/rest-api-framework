@@ -1,6 +1,10 @@
 package net.framework.api.rest;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -53,10 +57,10 @@ public class Main {
         System.out.println("Boot Java.");
         Map<String, String> header = new HashMap<String, String>();
         header.put("Content-Type", "application/json");
-        Task result = new WebApiClient<Task>("https://raw.githubusercontent.com", "/simonNozaki/stubjs/master/stub/task-register.json", header)
-                .get(Task.class);
+        WebApiClient<Task> client = new WebApiClient<Task>("https://raw.githubusercontent.com", "/simonNozaki/stubjs/master/stub/task-register.json", header);
+        Task res = client.get(Task.class);
 
-        System.out.println(new ObjectMapper().writeValueAsString(result));
+        System.out.println(new ObjectMapper().writeValueAsString(res));
     }
 
     /**
