@@ -3,6 +3,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Optional;
 
+import net.framework.api.rest.config.logger.AppWarnLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -21,19 +22,12 @@ import net.framework.api.rest.consts.LoggerConst;
  */
 public class AppLogger {
 
-	/**
-	 * ロガーインスタンス、トレースログ用
-	 */
 	private static final Logger appTraceINSTANCE = LoggerFactory.getLogger(AppTraceLogger.class.getCanonicalName());
 
-	/**
-	 * ロガーインスタンス、電文ログ用
-	 */
 	private static final Logger appTelegramINSTANCE = LoggerFactory.getLogger(AppTelegramLogger.class.getCanonicalName());
 
-	/**
-	 * ロガーインスタンス、エラーログ用
-	 */
+	private static final Logger appWarnINSTANCE = LoggerFactory.getLogger(AppWarnLogger.class.getCanonicalName());
+
 	private static final Logger appErrorINSTANCE = LoggerFactory.getLogger(AppErrorLogger.class.getCanonicalName());
 
 	/**
@@ -65,17 +59,18 @@ public class AppLogger {
 	    // ログレベルをロガーに入力
 	    ch.qos.logback.classic.Logger loggerInstance = (ch.qos.logback.classic.Logger)appTraceINSTANCE;
 		ch.qos.logback.classic.Logger errorLoggerInstance = (ch.qos.logback.classic.Logger)appErrorINSTANCE;
+		ch.qos.logback.classic.Logger warnLoggerInstance = (ch.qos.logback.classic.Logger)appWarnINSTANCE;
 
 
 		// レベル別にログを出力
 	    switch(level) {
 	        case LoggerConst.LOG_LEVEL_ERROR:
-	            loggerInstance.setLevel(Level.ERROR);
+				errorLoggerInstance.setLevel(Level.ERROR);
 	            logPrefix = MarkerFactory.getMarker(LoggerConst.LOG_PREFIX_ERROR);
 				appErrorINSTANCE.error(logPrefix, code, exception);
 	            break;
 	        case LoggerConst.LOG_LEVEL_WARN:
-	            loggerInstance.setLevel(Level.WARN);
+				warnLoggerInstance.setLevel(Level.WARN);
 	            logPrefix = MarkerFactory.getMarker(LoggerConst.LOG_PREFIX_WARN);
 	            appTraceINSTANCE.warn(logPrefix, code, exception);
                 break;
@@ -119,16 +114,17 @@ public class AppLogger {
         // ログレベルをロガーに入力
         ch.qos.logback.classic.Logger loggerInstance = (ch.qos.logback.classic.Logger)appTelegramINSTANCE;
 		ch.qos.logback.classic.Logger errorLoggerInstance = (ch.qos.logback.classic.Logger)appErrorINSTANCE;
+		ch.qos.logback.classic.Logger warnLoggerInstance = (ch.qos.logback.classic.Logger)appWarnINSTANCE;
 
         // レベル別にログを出力
         switch(level) {
             case LoggerConst.LOG_LEVEL_ERROR:
-                loggerInstance.setLevel(Level.ERROR);
+				errorLoggerInstance.setLevel(Level.ERROR);
                 logPrefix = MarkerFactory.getMarker(LoggerConst.LOG_PREFIX_ERROR);
 				appErrorINSTANCE.error(logPrefix, code);
                 break;
             case LoggerConst.LOG_LEVEL_WARN:
-                loggerInstance.setLevel(Level.WARN);
+				warnLoggerInstance.setLevel(Level.WARN);
                 logPrefix = MarkerFactory.getMarker(LoggerConst.LOG_PREFIX_WARN);
                 appTelegramINSTANCE.warn(logPrefix, code);
                 break;
@@ -152,11 +148,11 @@ public class AppLogger {
 
 	/**
 	 * トレースログを出力します。
-	 * @param body
-	 * @param LogCode logCode
-	 * @param Throwable th
-	 * @param Object className
-	 * @param Object methodName
+	 * @param code
+	 * @param message
+	 * @param th
+	 * @param className
+	 * @param methodName
 	 */
 	public static void trace(String code, String message, Throwable th, Object className, Object methodName) {
 	    log(LoggerConst.LOG_LEVEL_INFO, code, message, th, className, methodName);
@@ -164,10 +160,11 @@ public class AppLogger {
 
 	/**
 	 * エラーログを出力します。
-	 * @param LogCode logCode
-     * @param Throwable th
-     * @param Object className
-     * @param Object methodName
+	 * @param code
+	 * @param message
+     * @param th
+     * @param className
+     * @param methodName
 	 */
 	public static void error(String code, String message, Throwable th, Object className, Object methodName) {
 	    log(LoggerConst.LOG_LEVEL_ERROR, code, message, th, className, methodName);
@@ -175,8 +172,8 @@ public class AppLogger {
 
 	/**
 	 * 電文ログを出力します。
-	 * @param logCode
-	 * @param th
+	 * @param code
+	 * @param message
 	 * @param className
 	 * @param methodName
 	 * @param body
@@ -200,8 +197,8 @@ public class AppLogger {
 
 	/**
 	 * [例外クラス用]スタックトレース書き出し文字列を作成します。
-	 * @param Throwable excp
-	 * @return String
+	 * @param excp
+	 * @return 例外出力
 	 */
 	private static String getStackTraceString(Throwable excp) {
         StringBuilder sb = new StringBuilder();
@@ -218,22 +215,24 @@ public class AppLogger {
     }
 
 	/**
-     * [普通の文字列用]スタックトレース書き出し文字列を作成します。<br>
+     * <p>
+	 * [普通の文字列用]スタックトレース書き出し文字列を作成します。<br>
      * 例：<br>
-     * [Interface Body Start]<br>
+     * [Handled Exception Start]<br>
      * 電文ログ本文<br>
-     * [Interface Body End]<br>
-     * @param Throwable excp
-     * @return String
+     * [Handled Exception End]<br>
+	 * </p>
+     * @param body
+     * @return トレースログ出力
      */
     private static String getStackTraceString(String body) {
         StringBuilder sb = new StringBuilder();
         sb.append(LoggerConst.STR_NEWLINE);
-        sb.append(LoggerConst.STACKTRACE_START);
+        sb.append(LoggerConst.EXCEPTION_START);
         sb.append(LoggerConst.STR_NEWLINE);
         sb.append(body);
         sb.append(LoggerConst.STR_NEWLINE);
-        sb.append(LoggerConst.STACKTRACE_END);
+        sb.append(LoggerConst.EXCEPTION_END);
 
         return sb.toString();
     }

@@ -103,6 +103,16 @@ public class LoggerConst {
     public static final String STACKTRACE_END = "[Telegram Trace End]";
 
     /**
+     * 例外開始
+     */
+    public static final String EXCEPTION_START = "[Handled Exception Start]";
+
+    /**
+     * 例外終了
+     */
+    public static final String EXCEPTION_END = "[Handled Exception End]";
+
+    /**
      * 改行コード
      */
     public static final String STR_NEWLINE = "\n";

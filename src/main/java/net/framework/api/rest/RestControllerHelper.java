@@ -55,7 +55,7 @@ public class RestControllerHelper<T> {
          * @return ResponseProcessor ローカルな自分のクラス
          */
         public <R> ResponseProcessor<R> of(Supplier<R> supplier) {
-            return new ResponseProcessor<R>(supplier.get());
+            return new ResponseProcessor(supplier.get());
         }
 
         /**
@@ -64,7 +64,7 @@ public class RestControllerHelper<T> {
          * @return ResponseProcessor ローカルな自分のクラス
          */
         public <R> ResponseProcessor<R> with(R input) {
-            return new ResponseProcessor<R>(input);
+            return new ResponseProcessor(input);
         }
 
         /**
@@ -77,7 +77,7 @@ public class RestControllerHelper<T> {
             Optional.ofNullable(out.getErrors()).ifPresent((Errors serviceOutErrors) -> {
                 this.errors.getCodes().addAll(serviceOutErrors.getCodes());
             });
-            return new ResponseProcessor<R>(out.getValue(), out.getErrors());
+            return new ResponseProcessor(out.getValue(), out.getErrors());
         }
 
         /**
@@ -86,7 +86,7 @@ public class RestControllerHelper<T> {
          * @return
          */
         public <R> ResponseProcessor<R> operate(Function<T, R> function) {
-            return new ResponseProcessor<R>(function.apply(value));
+            return new ResponseProcessor(function.apply(value));
         }
 
         /**
@@ -95,7 +95,7 @@ public class RestControllerHelper<T> {
          * @return
          */
         public <U, R> ResponseProcessor<R> map(BiFunction<T, Errors, R> bifunction) {
-            return new ResponseProcessor<R>(bifunction.apply(value, errors));
+            return new ResponseProcessor(bifunction.apply(value, errors));
         }
 
         /**
@@ -107,7 +107,7 @@ public class RestControllerHelper<T> {
             if (predicate.test(value)) {
                 return new ResponseProcessor<T>(value);
             }
-            return new ResponseProcessor<T>();
+            return new ResponseProcessor();
         }
 
         /**
@@ -118,7 +118,7 @@ public class RestControllerHelper<T> {
          */
         public <V> ResponseProcessor<T> logOutput(String code, String message, V input) throws IOException {
             AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(input));
-            return new ResponseProcessor<T>(value);
+            return new ResponseProcessor(value);
         }
 
         /**
@@ -129,7 +129,7 @@ public class RestControllerHelper<T> {
          */
         public <V> ResponseProcessor<T> log(String code, String message) throws IOException {
             AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(value));
-            return new ResponseProcessor<T>(value);
+            return new ResponseProcessor(value);
         }
 
         /**
@@ -147,7 +147,7 @@ public class RestControllerHelper<T> {
      * @return ResponseProcessor<T>
      */
     protected static <T> ResponseProcessor<T> responseProcessBuilder() {
-        return new ResponseProcessor<T>();
+        return new ResponseProcessor();
     }
 
 }

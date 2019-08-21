@@ -16,7 +16,7 @@ public class ServiceHelper {
 	 * @return
 	 */
 	protected static <T> ServiceOutBuilder<T> doPipeServiceOut() {
-		return new ServiceOutBuilder<T>();
+		return new ServiceOutBuilder();
 	}
 
 	/**
