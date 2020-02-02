@@ -15,9 +15,10 @@ class ObjectInspectorTest {
 
     /**
      * 正常系
+     * isNullをスルーする
      */
     @Test
-    fun test001() {
+    fun test001_001() {
 
         var testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
 
@@ -28,6 +29,86 @@ class ObjectInspectorTest {
                 .isNull(testItem?.name, "name is null")
                 .isNull(testItem?.customer, "customer is null")
                 .build()
+
+        assertEquals(errors.codes.size, 0)
+    }
+
+    /**
+     * 正常系
+     * hasNullValueをスルーする
+     */
+    @Test
+    fun test001_002() {
+        val testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+
+        // エラーの構築
+        val errors: Errors = ObjectInspector.of(testItem)
+            .hasNullValue("request is null")
+            .build()
+
+        assertEquals(errors.codes.size, 0)
+    }
+
+    /**
+     * 正常系
+     * testをスルーする
+     */
+    @Test
+    fun test001_003() {
+        val testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+
+        // エラーの構築
+        val errors: Errors = ObjectInspector.of(testItem)
+            .test({it?.name.isNullOrBlank()}, "name is null or blank")
+            .build()
+
+        assertEquals(errors.codes.size, 0)
+    }
+
+    /**
+     * 正常系
+     * violateSpecificLengthをスルーする
+     */
+    @Test
+    fun test001_004() {
+        var testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+
+        // エラーの構築
+        var errors: Errors = ObjectInspector.of(testItem)
+            .violateSpecificLength(testItem?.id, 11, "digits of id is not 11")
+            .build()
+
+        assertEquals(errors.codes.size, 0)
+    }
+
+    /**
+     * 正常系
+     * violateMaxLengthをスルーする
+     */
+    @Test
+    fun test001_005() {
+        var testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+
+        // エラーの構築
+        var errors: Errors = ObjectInspector.of(testItem)
+            .violateMaxLength(testItem?.name, 40, "digits of name is not within 40")
+            .build()
+
+        assertEquals(errors.codes.size, 0)
+    }
+
+    /**
+     * 正常系
+     * logメソッドの呼び出し確認
+     */
+    @Test
+    fun test001_006() {
+        var testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+
+        // エラーの構築
+        var errors: Errors = ObjectInspector.of(testItem)
+            .log<TestItem>("", "")
+            .build()
 
         assertEquals(errors.codes.size, 0)
     }
@@ -159,4 +240,41 @@ class ObjectInspectorTest {
         // アサーション
         assertEquals(errors.codes[0], "digits of id is null")
     }
+
+    /**
+     * 不正系
+     * IDの桁数が規定以上である
+     */
+    @Test
+    fun test009() {
+        var testItem: TestItem? = TestItem("aaaaaaaaaaaa", null, 1000, 1, TestCustomer("", "Patrick Collison", 0, 31))
+        // エラーの構築
+        var errors: Errors = ObjectInspector.of(testItem)
+            .violateMaxLength(testItem?.id, 10, "digits of id is over 10")
+            .build()
+
+        println(ObjectMapper().writeValueAsString(errors))
+
+        // アサーション
+        assertEquals(errors.codes[0], "digits of id is over 10")
+    }
+
+    /**
+     * 不正系
+     * リクエストオブジェクトがnull
+     */
+    @Test
+    fun test010() {
+        var testItem: TestItem? = null
+        // エラーの構築
+        var errors: Errors = ObjectInspector.of(testItem)
+            .hasNullValue("request is null")
+            .build()
+
+        println(ObjectMapper().writeValueAsString(errors))
+
+        // アサーション
+        assertEquals(errors.codes[0], "request is null")
+    }
+
 }

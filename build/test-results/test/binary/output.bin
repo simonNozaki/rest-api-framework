@@ -1,4 +1,0 @@
-Z{"codes":["customer id is null or blank","id is null or blank","name is null"],"id":null}
-/{"codes":["digits of id is not 10"],"id":null}
--{"codes":["digits of id is null"],"id":null}
-	-{"codes":["digits of id is null"],"id":null}

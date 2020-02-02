@@ -1,6 +1,7 @@
 package net.framework.api.rest.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -33,10 +34,10 @@ public class ObjectUtil {
 
 	/**
 	 * 与えられた引数からリストを作成します。
-	 * @param ...t 一つ以上のオブジェクト、全て同じ型を指定する
+	 * @param t 一つ以上のオブジェクト、全て同じ型を指定する
 	 * @return List<T> 引数で与えられたオブジェクトを結合したリスト
 	 */
-	public <T> List<T> convertToList(T...t) {
+	public static  <T> List<T> convertToList(T...t) {
 		List<T> result = new ArrayList<>();
 		for (T instance : t) {
 			result.add(instance);
@@ -49,7 +50,12 @@ public class ObjectUtil {
      * @param subject 検査対象パス
      * @return 真偽値
      */
-	public boolean isUri(String subject){
+	public static boolean isUri(String subject){
+	    // 空文字もしくはnullは自動的にfalse
+	    if (StringUtil.isNullOrBlank(subject)) {
+	        return false;
+        }
+
 	    String regex = "^(http|https)://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(subject);
@@ -61,11 +67,11 @@ public class ObjectUtil {
 
 	/**
      * 任意の型のリストからStreamを返します.リストが空の場合、空のStreamを返却します。
-     * @param List<T> list
+     * @param list ストリームに変換するリスト
      * @return Stream<T>
      */
-    public static <T> Stream<T> getStream(List<T> list) {
-        if(list == null) {
+    public static <T> Stream<T> getStream(Collection<T> list) {
+        if(isNullOrEmpty(list)) {
             return Stream.empty();
         }
         return list.stream();

@@ -57,7 +57,7 @@ public class Main {
         System.out.println("Boot Java.");
         Map<String, String> header = new HashMap<String, String>();
         header.put("Content-Type", "application/json");
-        WebApiClient<Task> client = new WebApiClient<Task>("https://raw.githubusercontent.com", "/simonNozaki/stubjs/master/stub/task-register.json", header);
+        WebApiClient<Task> client = new WebApiClient("https://raw.githubusercontent.com", "/simonNozaki/stubjs/master/stub/task-register.json", header);
         Task res = client.get(Task.class);
 
         System.out.println(new ObjectMapper().writeValueAsString(res));

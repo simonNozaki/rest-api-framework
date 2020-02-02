@@ -19,19 +19,6 @@ public class StringUtil {
     }
 
     /**
-     * 文字列の長さが指定された長さであることを検査します.
-     * @param String target
-     * @param int max
-     * @return boolean
-     */
-    public static boolean isNotEqualToSpecificLength(String target, int length) {
-        if (target.length() != length) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * 文字列の長さが指定された長さであることを検査します。
      * String以外のインスタンスである場合、全てfalseを返却します。
      * @param subject 被検査対象
@@ -53,7 +40,7 @@ public class StringUtil {
      * @return boolean 判定結果
      */
     public static boolean isNullOrBlank(String target) {
-        return target == null || target == "";
+        return target == null || target.equals("");
     }
 
     /**
