@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import net.framework.api.rest.consts.AppConst
 import net.framework.api.rest.exception.WebApiBadRequestException
 import net.framework.api.rest.util.ObjectUtil
-import org.omg.CORBA.Object
 import javax.ws.rs.BadRequestException
 import javax.ws.rs.client.Client
 import javax.ws.rs.client.ClientBuilder
@@ -22,17 +21,17 @@ class WebApiClient<T>(uri: String, path: String, headerMap: Map<String, String>)
     /**
      * URI
      */
-    val uri: String = uri;
+    val uri: String = uri
 
     /**
      * パスパラメータ
      */
-    val path: String = path;
+    val path: String = path
 
     /**
      * HTTPヘッダー情報map
      */
-    val headerMap: Map<String, String> = headerMap;
+    val headerMap: Map<String, String> = headerMap
 
     /**
      * HTTPヘッダー
@@ -57,7 +56,7 @@ class WebApiClient<T>(uri: String, path: String, headerMap: Map<String, String>)
             headerMap.map { entry: Map.Entry<String, String> -> {
                     headers.putSingle(entry.key, entry.value as Any);
                 }
-            };
+            }
         }
     }
 

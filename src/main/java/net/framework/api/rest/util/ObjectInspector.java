@@ -18,8 +18,6 @@ import net.framework.api.rest.consts.AppConst;
  */
 public class ObjectInspector<T> {
 
-    T input;
-
     // デフォルトコンストラクタ禁止
     private ObjectInspector() {}
 
@@ -124,31 +122,32 @@ public class ObjectInspector<T> {
          * @return
          */
         public <V> Inspector<T> violateSpecificLength(V target, int length, String code) {
+            // 空文字、もしくはnullの場合強制的にエラー設定
             if (ObjectUtil.isNullOrEmpty(target)) {
-                return new Inspector<T>(this.value, this.errors);
+                return this.satisfyPredicateWithInput(target, (V value) -> true, code);
             }
-            return this.satisfyPredicateWithInput(target, (V inputValue) -> !StringUtil.isPaticularLength(target, length), code);
+            return this.satisfyPredicateWithInput(target, (V inputValue) -> !StringUtil.isParticularLength(target, length), code);
         }
 
         /**
-         * カスタムの評価条件からエラーコードを設定します.
-         * @param Predicate<T> predicate
-         * @param String code
-         * @return Inspector<T>
+         * 述語を評価します。
+         * @param predicate 述語
+         * @param code エラーコード
+         * @return Inspectorインスタンス
          */
-        public Inspector<T> evaluateCustomCondition(Predicate<T> predicate, String code) {
+        public Inspector<T> test(Predicate<T> predicate, String code) {
             return this.satisfyPredicateWithInput(this.value, predicate, code);
         }
 
         /**
          * 入力が指定された条件を満たすことを確認します.<br>
          * 条件にマッチするエラーを入力することで、エラーコードを設定します.
-         * @param T input
-         * @param Predicate<T> predicate
-         * @param Errors errors
-         * @return Inspector<T>
+         * @param input 評価対象
+         * @param predicate 述語
+         * @param code エラーコード
+         * @return Inspectorインスタンス
          */
-        public <V> Inspector<T> satisfyPredicateWithInput(V input, Predicate<V> predicate, String code) {
+        private <V> Inspector<T> satisfyPredicateWithInput(V input, Predicate<V> predicate, String code) {
             if (predicate.test(input)) {
                 // エラーコードのリストがない場合はリストを初期化する
                 List<String> codes = Optional.ofNullable(this.errors.getCodes()).orElse(new ArrayList<>());

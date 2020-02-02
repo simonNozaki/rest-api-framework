@@ -9,3 +9,7 @@ src/main/main.iml
 .gradle/
 
 .idea/
+
+gradle.properties
+
+*.iml

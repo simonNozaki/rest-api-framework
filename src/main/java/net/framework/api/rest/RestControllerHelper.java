@@ -146,7 +146,7 @@ public class RestControllerHelper<T> {
      * @param T value
      * @return ResponseProcessor<T>
      */
-    protected static <T> ResponseProcessor<T> responseProcessBuilder() {
+    protected static ResponseProcessor responseProcessBuilder() {
         return new ResponseProcessor();
     }
 

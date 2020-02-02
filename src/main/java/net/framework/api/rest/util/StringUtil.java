@@ -38,7 +38,7 @@ public class StringUtil {
      * @param length 調査したい文字列の長さ
      * @return 判定結果
      */
-    public static <T> boolean isPaticularLength(T subject, int length) {
+    public static <T> boolean isParticularLength(T subject, int length) {
         // 文字列の場合、intにパースして長さ比較
         if(subject.getClass() == String.class && ((String)subject).length() == length) {
             return true;
