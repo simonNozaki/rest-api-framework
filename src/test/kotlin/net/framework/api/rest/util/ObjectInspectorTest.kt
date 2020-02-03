@@ -1,7 +1,7 @@
 package net.framework.api.rest.util
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import net.framework.api.rest.Errors
+import net.framework.api.rest.model.Errors
 import net.framework.api.rest.data.TestCustomer
 import net.framework.api.rest.data.TestItem
 import org.junit.jupiter.api.Test

@@ -1,4 +1,4 @@
-package net.framework.api.rest;
+package net.framework.api.rest.model;
 
 import java.util.List;
 

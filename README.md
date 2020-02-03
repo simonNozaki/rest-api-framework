@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/simonNozaki/rest-api-framework.svg?branch=master)](https://travis-ci.org/simonNozaki/rest-api-framework)
 # rest-api-framework
 ## Overview
 Perhaps, on building REST API with Java or Kotlin, we always do the same things like  

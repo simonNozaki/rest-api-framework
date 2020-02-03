@@ -14,7 +14,7 @@ import ch.qos.logback.classic.Level;
 import net.framework.api.rest.config.logger.AppErrorLogger;
 import net.framework.api.rest.config.logger.AppTelegramLogger;
 import net.framework.api.rest.config.logger.AppTraceLogger;
-import net.framework.api.rest.consts.LoggerConst;
+import net.framework.api.rest.constant.LoggerConst;
 
 
 /**

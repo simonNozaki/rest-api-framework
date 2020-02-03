@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import net.framework.api.rest.Errors;
+import net.framework.api.rest.model.Errors;
 import net.framework.api.rest.config.AppLogger;
-import net.framework.api.rest.consts.AppConst;
+import net.framework.api.rest.constant.AppConst;
 
 /**
  * オブジェクト検査クラス。

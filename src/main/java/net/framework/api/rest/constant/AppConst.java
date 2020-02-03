@@ -1,4 +1,4 @@
-package net.framework.api.rest.consts;
+package net.framework.api.rest.constant;
 
 /**
  * アプリ共通定数クラス

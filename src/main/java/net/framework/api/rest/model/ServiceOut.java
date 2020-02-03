@@ -1,4 +1,5 @@
-package net.framework.api.rest;
+package net.framework.api.rest.model;
+
 
 /**
  * 共通Service処理結果オブジェクト。

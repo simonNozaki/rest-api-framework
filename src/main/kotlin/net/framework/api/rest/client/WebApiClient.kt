@@ -1,7 +1,7 @@
 package net.framework.api.rest.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import net.framework.api.rest.consts.AppConst
+import net.framework.api.rest.constant.AppConst
 import net.framework.api.rest.exception.WebApiBadRequestException
 import net.framework.api.rest.util.ObjectUtil
 import javax.ws.rs.BadRequestException

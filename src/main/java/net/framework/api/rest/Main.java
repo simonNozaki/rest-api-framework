@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.framework.api.rest.client.WebApiClient;
+import net.framework.api.rest.model.Errors;
 import net.framework.api.rest.util.ObjectInspector;
 import net.framework.api.rest.util.ObjectUtil;
 

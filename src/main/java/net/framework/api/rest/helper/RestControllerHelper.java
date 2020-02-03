@@ -1,6 +1,8 @@
-package net.framework.api.rest;
+package net.framework.api.rest.helper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.framework.api.rest.model.Errors;
+import net.framework.api.rest.model.ServiceOut;
 import net.framework.api.rest.config.AppLogger;
 
 import java.io.IOException;
