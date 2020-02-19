@@ -171,6 +171,18 @@ public class AppLogger {
 	}
 
 	/**
+	 * 警告ログを出力します。
+	 * @param code
+	 * @param message
+	 * @param th
+	 * @param className
+	 * @param methodName
+	 */
+	public static void warn(String code, String message, Throwable th, Object className, Object methodName) {
+		log(LoggerConst.LOG_LEVEL_WARN, code, message, th, className, methodName);
+	}
+
+	/**
 	 * 電文ログを出力します。
 	 * @param code
 	 * @param message

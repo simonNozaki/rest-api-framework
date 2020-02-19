@@ -1,5 +1,6 @@
 package net.framework.api.rest.helper;
 
+import net.framework.api.rest.config.AppLogger;
 import net.framework.api.rest.model.Errors;
 import net.framework.api.rest.model.ServiceOut;
 
@@ -41,7 +42,7 @@ public class ServiceHelper {
 
 		// デフォルトコンストラクタ。引数あり。
 		private ServiceOutBuilder(T value, Errors errors) {
-			this.value = Objects.requireNonNull(value);
+			this.value = value;
             this.errors = errors;
 		}
 

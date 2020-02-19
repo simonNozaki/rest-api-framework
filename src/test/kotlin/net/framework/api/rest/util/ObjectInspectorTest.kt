@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import net.framework.api.rest.model.Errors
 import net.framework.api.rest.data.TestCustomer
 import net.framework.api.rest.data.TestItem
+import net.framework.api.rest.data.TestOrder
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertAll
@@ -265,9 +266,9 @@ class ObjectInspectorTest {
      */
     @Test
     fun test010() {
-        var testItem: TestItem? = null
+        val testItem: TestItem? = null
         // エラーの構築
-        var errors: Errors = ObjectInspector.of(testItem)
+        val errors: Errors = ObjectInspector.of(testItem)
             .hasNullValue("request is null")
             .build()
 
@@ -275,6 +276,76 @@ class ObjectInspectorTest {
 
         // アサーション
         assertEquals(errors.codes[0], "request is null")
+    }
+
+    /**
+     * 正常系
+     * testFromIterable
+     */
+    @Test
+    fun test011_001() {
+        val order = TestOrder(
+            "20200201-00001",
+            "merchant001",
+                mutableListOf(
+                    TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31)),
+                    TestItem("merchant001", "bag", 2000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+                )
+            )
+
+        val errors: Errors = ObjectInspector.of(order)
+            .testFromIterable(order.items, { it.id == null }, "items has null of id")
+            .build()
+
+        assertEquals(errors.codes.size, 0)
+    }
+
+    /**
+     * 不正系
+     * testFromIterable
+     * itemのidがnull
+     */
+    @Test
+    fun test011_002() {
+        val order = TestOrder(
+            "20200201-00001",
+            "merchant001",
+            mutableListOf(
+                TestItem("", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31)),
+                TestItem("merchant001", "bag", 2000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+            )
+        )
+
+        val errors: Errors = ObjectInspector.of(order)
+            .testFromIterable(order.items, { it.id.isNullOrBlank() }, "items has null of id")
+            .build()
+
+        assertEquals(errors.codes[0], "items has null of id")
+    }
+
+    /**
+     * 不正系
+     * testFromIterable
+     * itemのidが2つともnull
+     */
+    fun test011_003() {
+        val order = TestOrder(
+            "20200201-00001",
+            "merchant001",
+            mutableListOf(
+                TestItem("", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31)),
+                TestItem("", "bag", 2000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+            )
+        )
+
+        val errors: Errors = ObjectInspector.of(order)
+            .testFromIterable(order.items, { it.id.isNullOrBlank() }, "items has null of id")
+            .build()
+
+        println(ObjectMapper().writeValueAsString(errors))
+
+        assertEquals(errors.codes[0], "items has null of id")
+        assertEquals(errors.codes[1], "items has null of id")
     }
 
 }

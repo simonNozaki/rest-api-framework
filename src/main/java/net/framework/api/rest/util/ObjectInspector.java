@@ -157,7 +157,7 @@ public class ObjectInspector {
          */
         private <E> Inspector<T> satisfyPredicateWithIterable(Collection<E> target, Predicate<E> predicate, String code) {
             long counter = ObjectUtil.getStream(target)
-                    .filter(predicate::test)
+                    .filter(predicate)
                     .count();
             if (counter > 0) {
                 // エラーコードのリストがない場合はリストを初期化する

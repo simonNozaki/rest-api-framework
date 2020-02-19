@@ -97,7 +97,7 @@ public class Main {
 
         Task task = generateTask();
         ObjectInspector.of(task)
-                .testFromIterable(task.labels, (List<Label> labels) -> { labels } , "")
+                .testFromIterable(task.labels, (Label labels) -> labels.id != null, "")
                 .build();
 
         System.out.println(new ObjectMapper().writeValueAsString(res));
