@@ -1,9 +1,6 @@
 package net.framework.api.rest.util;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -14,11 +11,11 @@ import net.framework.api.rest.config.AppLogger;
 import net.framework.api.rest.constant.AppConst;
 
 /**
- * オブジェクト検査クラス。
+ * This class provides the inspection functions for objects.
  */
-public class ObjectInspector<T> {
+public class ObjectInspector {
 
-    // デフォルトコンストラクタ禁止
+    // Forbid a default constructor
     private ObjectInspector() {}
 
     /**
@@ -140,6 +137,38 @@ public class ObjectInspector<T> {
         }
 
         /**
+         * Evaluate a predicate for an iterable.
+         * @param target
+         * @param code
+         * @param <E>
+         * @return
+         */
+        public <E> Inspector<T> testFromIterable(Collection<E> target, Predicate<E> predicate, String code) {
+            return this.satisfyPredicateWithIterable(target, predicate, code);
+        }
+
+        /**
+         * This method ensure that a target satisfy a specific condition.
+         * @param target target object
+         * @param predicate predicate
+         * @param code an error code
+         * @param <E> type parameter
+         * @return an Inspector instance
+         */
+        private <E> Inspector<T> satisfyPredicateWithIterable(Collection<E> target, Predicate<E> predicate, String code) {
+            long counter = ObjectUtil.getStream(target)
+                    .filter(predicate::test)
+                    .count();
+            if (counter > 0) {
+                // エラーコードのリストがない場合はリストを初期化する
+                List<String> codes = Optional.ofNullable(this.errors.getCodes()).orElse(new ArrayList<>());
+                codes.add(code);
+                this.errors.setCodes(codes);
+            }
+            return new Inspector(this.value, this.errors);
+        }
+
+        /**
          * 入力が指定された条件を満たすことを確認します.<br>
          * 条件にマッチするエラーを入力することで、エラーコードを設定します.
          * @param input 評価対象
@@ -154,7 +183,7 @@ public class ObjectInspector<T> {
                 codes.add(code);
                 this.errors.setCodes(codes);
             }
-            return new Inspector<T>(this.value, this.errors);
+            return new Inspector(this.value, this.errors);
         }
 
         /**
