@@ -95,11 +95,6 @@ public class Main {
         WebApiClient<Task> client = new WebApiClient("https://raw.githubusercontent.com", "/simonNozaki/stubjs/master/stub/task-register.json", header);
         Task res = client.get(Task.class);
 
-        Task task = generateTask();
-        ObjectInspector.of(task)
-                .testFromIterable(task.labels, (List<Label> labels) -> { labels } , "")
-                .build();
-
         System.out.println(new ObjectMapper().writeValueAsString(res));
     }
 
