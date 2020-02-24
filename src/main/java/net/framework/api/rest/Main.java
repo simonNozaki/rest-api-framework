@@ -42,7 +42,6 @@ public class Main {
     static class Task {
         private String taskId;
         private String taskTitle;
-        private List<Label> labels;
         public String getTaskId(){
             return this.taskId;
         }
@@ -54,33 +53,6 @@ public class Main {
         }
         public void setTaskTitle(String taskTitle) {
             this.taskTitle = taskTitle;
-        }
-        public List<Label> getLabels() {
-            return labels;
-        }
-        public void setLabels(List<Label> labels) {
-            this.labels = labels;
-        }
-    }
-
-    static class Label {
-        private String id;
-        private String name;
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
         }
     }
 
@@ -94,11 +66,6 @@ public class Main {
         header.put("Content-Type", "application/json");
         WebApiClient<Task> client = new WebApiClient("https://raw.githubusercontent.com", "/simonNozaki/stubjs/master/stub/task-register.json", header);
         Task res = client.get(Task.class);
-
-        Task task = generateTask();
-        ObjectInspector.of(task)
-                .testFromIterable(task.labels, (Label labels) -> labels.id != null, "")
-                .build();
 
         System.out.println(new ObjectMapper().writeValueAsString(res));
     }
@@ -133,26 +100,6 @@ public class Main {
                 .collect(Collectors.toList());
 
         System.out.println(new ObjectMapper().writeValueAsString(object));
-    }
-
-    private static Task generateTask() {
-        Task task = new Task();
-        task.setTaskId("tk0001");
-        task.setTaskTitle("test task");
-        List<Label> labels = new ArrayList();
-        Label label1 = new Label();
-        label1.setId("lb0001");
-        label1.setName("label 1");
-        Label label2 = new Label();
-        label2.setId("lb0002");
-        label2.setName("label 2");
-        Label label3 = new Label();
-        label3.setId("lb0003");
-        label3.setName("label 3");
-        labels.add(label1);
-        labels.add(label2);
-        labels.add(label3);
-        return task;
     }
 
 }

@@ -58,7 +58,7 @@ public class ServiceHelper {
 		    List<String> codes = new ArrayList();
 			codes.add(code);
 			newErr.setCodes(codes);
-			return new ServiceOutBuilder<T>(this.value, newErr);
+			return new ServiceOutBuilder<>(this.value, newErr);
 		}
 
 		/**
@@ -69,10 +69,8 @@ public class ServiceHelper {
 		public ServiceOutBuilder<T> setErrors(List<String> codes) {
 			// Initialize an error object.
 			Errors newErr = Optional.ofNullable(this.errors).orElse(new Errors());
-			List<String> errors = new ArrayList();
-			errors.addAll(codes);
-			newErr.setCodes(errors);
-			return new ServiceOutBuilder<T>(this.value, newErr);
+			newErr.setCodes(new ArrayList(codes));
+			return new ServiceOutBuilder<>(this.value, newErr);
 		}
 
 		/**
@@ -82,7 +80,7 @@ public class ServiceHelper {
 		 * @return ServiceOutBuilder
 		 */
 		public <V> ServiceOutBuilder<V> setResult(V input) {
-			return new ServiceOutBuilder<V>(input, null);
+			return new ServiceOutBuilder<>(input, null);
 		}
 
 		/**
@@ -91,7 +89,7 @@ public class ServiceHelper {
 		 * @return ServiceOut<T>
 		 */
 		public ServiceOut<T> build() {
-			ServiceOut<T> serviceOut = new ServiceOut<T>();
+			ServiceOut<T> serviceOut = new ServiceOut<>();
 			serviceOut.setValue(value);
 			serviceOut.setErrors(errors);
 			return serviceOut;

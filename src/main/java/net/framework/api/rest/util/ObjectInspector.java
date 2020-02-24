@@ -20,22 +20,22 @@ public class ObjectInspector {
 
     /**
      * インプットの入力検査パイプラインを開始します.入力チェック操作はInspectorクラスが提供します.
-     * @param T input
+     * @param input a value that is evaluated in the next pipelines.
      * @return InputInspector<T>
      */
     public static <T> Inspector<T> of(T input) {
-        return new Inspector<T>(input);
+        return new Inspector<>(input);
     }
 
     /**
      * 入力検査機能を提供するクラスです.
-     * @param <T>
+     * @param <T> type parameter
      */
     public static final class Inspector<T> {
 
-        T value;
+        private final T value;
 
-        Errors errors;
+        private Errors errors;
 
         /**
          * デフォルトコンストラクタ
@@ -53,10 +53,7 @@ public class ObjectInspector {
          */
         private Inspector(T value, Errors errors) {
             this.value = value;
-            if (ObjectUtil.isNullOrEmpty(this.errors)) {
-                this.errors = new Errors();
-            }
-            this.errors = errors;
+            this.errors = Optional.ofNullable(errors).orElse(new Errors());
         }
 
         /**
@@ -65,23 +62,39 @@ public class ObjectInspector {
          * @param code ログに出すコード
          * @param message ログメッセージ
          * @return {@code Inspector}
-         * @throws Exception
          */
         public <V> Inspector<T> log(String code, String message){
             try{
                 AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(this.value));
-                return new Inspector<T>(value);
+                return new Inspector<>(value);
             }catch(Exception e){
                 AppLogger.error(null, AppConst.SYSTEM_ERROR, e, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName());
-                return new Inspector<T>(value);
+                return new Inspector<>(value);
+            }
+        }
+
+        /**
+         * Peak an error.
+         * Recommended to use this method after methods like {@code isNull}, {@code hasNullValue}
+         * @param code a error code
+         * @param message an error message
+         * @param <V> type parameter
+         * @return an {@code Inspector} instance
+         */
+        public <V> Inspector<T> peakError(String code, String message) {
+            try{
+                AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(this.errors));
+                return new Inspector<>(value, errors);
+            }catch(Exception e){
+                AppLogger.error(null, AppConst.SYSTEM_ERROR, e, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName());
+                return new Inspector<>(value, errors);
             }
         }
 
         /**
          * 入力がnullもしくは空の場合、エラーコードを設定します.
-         * @param value
+         * @param code an error code
          * @return Inspector<T>
-         * @throws Exception
          */
         public Inspector<T> hasNullValue(String code){
             return this.satisfyPredicateWithInput(this.value, (T inputValue) -> ObjectUtil.isNullOrEmpty(this.value), code);
@@ -99,24 +112,24 @@ public class ObjectInspector {
 
         /**
          * 桁数チェックを行い、上限を超えていればエラーコードを設定します。
-         * @param String target
-         * @param int max
-         * @param String code
-         * @return
+         * @param target a checked target object
+         * @param max max length checked
+         * @param code error code
+         * @return an Inspector instance
          */
         public <V> Inspector<T> violateMaxLength(V target, int max, String code) {
             if (ObjectUtil.isNullOrEmpty(target)) {
-                return new Inspector<T>(this.value, this.errors);
+                return new Inspector<>(this.value, this.errors);
             }
             return this.satisfyPredicateWithInput(target, (V inputValue) -> StringUtil.isOverSpecificLength(target.toString(), max), code);
         }
 
         /**
          * 桁数チェックを行い、指定された文字長でなければエラーコードを設定します。
-         * @param String target
-         * @param int max
-         * @param String code
-         * @return
+         * @param target a checked target object
+         * @param length length checked
+         * @param code error code
+         * @return an Inspector instance
          */
         public <V> Inspector<T> violateSpecificLength(V target, int length, String code) {
             // 空文字、もしくはnullの場合強制的にエラー設定
@@ -127,10 +140,10 @@ public class ObjectInspector {
         }
 
         /**
-         * 述語を評価します。
-         * @param predicate 述語
-         * @param code エラーコード
-         * @return Inspectorインスタンス
+         * Evaluate a predicate.
+         * @param predicate a predicate
+         * @param code error codes
+         * @return an Inspector instance
          */
         public Inspector<T> test(Predicate<T> predicate, String code) {
             return this.satisfyPredicateWithInput(this.value, predicate, code);
@@ -138,10 +151,10 @@ public class ObjectInspector {
 
         /**
          * Evaluate a predicate for an iterable.
-         * @param target
-         * @param code
-         * @param <E>
-         * @return
+         * @param target a checked target object
+         * @param code error codes
+         * @param <E> type parameter
+         * @return an Inspector instance
          */
         public <E> Inspector<T> testFromIterable(Collection<E> target, Predicate<E> predicate, String code) {
             return this.satisfyPredicateWithIterable(target, predicate, code);
@@ -156,16 +169,21 @@ public class ObjectInspector {
          * @return an Inspector instance
          */
         private <E> Inspector<T> satisfyPredicateWithIterable(Collection<E> target, Predicate<E> predicate, String code) {
-            long counter = ObjectUtil.getStream(target)
+            // evaluate errors
+            final long counter = ObjectUtil.getStream(target)
                     .filter(predicate)
+                    .peek(System.out::println)
                     .count();
+
             if (counter > 0) {
-                // エラーコードのリストがない場合はリストを初期化する
+                // initialize the error code list when this class has no errors
                 List<String> codes = Optional.ofNullable(this.errors.getCodes()).orElse(new ArrayList<>());
-                codes.add(code);
+                for (long i=0;i<counter;i++){
+                    codes.add(code);
+                }
                 this.errors.setCodes(codes);
             }
-            return new Inspector(this.value, this.errors);
+            return new Inspector<>(this.value, this.errors);
         }
 
         /**
@@ -183,13 +201,12 @@ public class ObjectInspector {
                 codes.add(code);
                 this.errors.setCodes(codes);
             }
-            return new Inspector(this.value, this.errors);
+            return new Inspector<>(this.value, this.errors);
         }
 
         /**
          * エラーを昇順に構築します。
          * @return Errors エラー情報
-         * @throws Exception
          */
         public Errors build(){
             if (!ObjectUtil.isNullOrEmpty(this.errors)) {

@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 共通エラーオブジェクト。
  */
-public class Errors extends AbstractErrors {
+public class Errors {
 
     public Errors() {}
 
@@ -27,12 +27,10 @@ public class Errors extends AbstractErrors {
 	 */
 	private String id;
 
-	@Override
 	public List<String> getCodes() {
 		return codes;
 	}
 
-	@Override
 	public void setCodes(List<String> codes) {
 		this.codes = codes;
 	}
