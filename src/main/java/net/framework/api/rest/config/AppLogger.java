@@ -33,12 +33,11 @@ public class AppLogger {
 	/**
 	 * ログレベルに応じたログ出力を実施します。<br>
 	 * bodyを指定せず、nullが設定された場合MDCのキーを設定しません。
-	 * @param String level
-	 * @param String msg
-	 * @param Throwable th
-	 * @param Object className
-     * @param Object methodName
-     * @param String body
+	 * @param level
+	 * @param message
+	 * @param th
+	 * @param className
+     * @param methodName
 	 */
 	private static void log(String level, String code, String message, Throwable th, Object className, Object methodName) {
 	    // MDCを初期化
@@ -93,9 +92,9 @@ public class AppLogger {
 
 	/**
 	 * 電文ログの出力実施を提供します。
-	 * @param logLevelInfo
-	 * @param logCode
-	 * @param object
+	 * @param level
+	 * @param code
+	 * @param message
 	 * @param className
 	 * @param methodName
 	 * @param body
@@ -215,13 +214,13 @@ public class AppLogger {
 	private static String getStackTraceString(Throwable excp) {
         StringBuilder sb = new StringBuilder();
         sb.append(LoggerConst.STR_NEWLINE);
-        sb.append(LoggerConst.STACKTRACE_START);
+        sb.append(LoggerConst.EXCEPTION_START);
         sb.append(LoggerConst.STR_NEWLINE);
         StringWriter stringWriter = new StringWriter();
         excp.printStackTrace(new PrintWriter(stringWriter));
         sb.append(stringWriter.toString());
         sb.append(LoggerConst.STR_NEWLINE);
-        sb.append(LoggerConst.STACKTRACE_END);
+        sb.append(LoggerConst.EXCEPTION_END);
 
         return sb.toString();
     }
@@ -240,11 +239,11 @@ public class AppLogger {
     private static String getStackTraceString(String body) {
         StringBuilder sb = new StringBuilder();
         sb.append(LoggerConst.STR_NEWLINE);
-        sb.append(LoggerConst.EXCEPTION_START);
+        sb.append(LoggerConst.TELEGRAM_START);
         sb.append(LoggerConst.STR_NEWLINE);
         sb.append(body);
         sb.append(LoggerConst.STR_NEWLINE);
-        sb.append(LoggerConst.EXCEPTION_END);
+        sb.append(LoggerConst.TELEGRAM_END);
 
         return sb.toString();
     }

@@ -83,7 +83,9 @@ public class ObjectInspector {
          */
         public <V> Inspector<T> peakError(String code, String message) {
             try{
-                AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(this.errors));
+                if(!ObjectUtil.isNullOrEmpty(this.errors.getCodes())) {
+                    AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(this.errors));
+                }
                 return new Inspector<>(value, errors);
             }catch(Exception e){
                 AppLogger.error(null, AppConst.SYSTEM_ERROR, e, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName());

@@ -95,22 +95,22 @@ public class LoggerConst {
     /**
      * 電文ログ、開始
      */
-    public static final String STACKTRACE_START = "[Telegram Trace Start]";
+    public static final String TELEGRAM_START = "/_/_/_/_/_/_/_/_ Telegram Start /_/_/_/_/_/_/_/_";
 
     /**
      * 電文ログ、終了
      */
-    public static final String STACKTRACE_END = "[Telegram Trace End]";
+    public static final String TELEGRAM_END = "/_/_/_/_/_/_/_/_ Telegram End /_/_/_/_/_/_/_/_";
 
     /**
      * 例外開始
      */
-    public static final String EXCEPTION_START = "[Handled Exception Start]";
+    public static final String EXCEPTION_START = "/_/_/_/_/_/_/_/_ Handled Exception Start /_/_/_/_/_/_/_/_";
 
     /**
      * 例外終了
      */
-    public static final String EXCEPTION_END = "[Handled Exception End]";
+    public static final String EXCEPTION_END = "/_/_/_/_/_/_/_/_ Handled Exception End /_/_/_/_/_/_/_/_";
 
     /**
      * 改行コード
