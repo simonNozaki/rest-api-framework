@@ -108,7 +108,7 @@ class ObjectInspectorTest {
 
         // エラーの構築
         var errors: Errors = ObjectInspector.of(testItem)
-            .log<TestItem>("", "")
+            .log("", "")
             .build()
 
         assertEquals(errors.codes.size, 0)

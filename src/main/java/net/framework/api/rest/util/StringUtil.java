@@ -7,8 +7,8 @@ public class StringUtil {
 
     /**
      * 文字列の桁数チェックを実施します.
-     * @param String target
-     * @param int max
+     * @param target a target string
+     * @param max max size of a string
      * @return boolean
      */
     public static boolean isOverSpecificLength(String target, int max) {
@@ -23,6 +23,7 @@ public class StringUtil {
      * String以外のインスタンスである場合、全てfalseを返却します。
      * @param subject 被検査対象
      * @param length 調査したい文字列の長さ
+     * @param <T> generics of a subject
      * @return 判定結果
      */
     public static <T> boolean isParticularLength(T subject, int length) {

@@ -147,11 +147,11 @@ public class AppLogger {
 
 	/**
 	 * トレースログを出力します。
-	 * @param code
-	 * @param message
-	 * @param th
-	 * @param className
-	 * @param methodName
+	 * @param code a log code
+	 * @param message a log message
+	 * @param th a throwable
+	 * @param className class name
+	 * @param methodName method name
 	 */
 	public static void trace(String code, String message, Throwable th, Object className, Object methodName) {
 	    log(LoggerConst.LOG_LEVEL_INFO, code, message, th, className, methodName);
@@ -159,11 +159,11 @@ public class AppLogger {
 
 	/**
 	 * エラーログを出力します。
-	 * @param code
-	 * @param message
-     * @param th
-     * @param className
-     * @param methodName
+	 * @param code a log code
+	 * @param message a log message
+	 * @param th a throwable
+	 * @param className class name
+	 * @param methodName method name
 	 */
 	public static void error(String code, String message, Throwable th, Object className, Object methodName) {
 	    log(LoggerConst.LOG_LEVEL_ERROR, code, message, th, className, methodName);
@@ -171,11 +171,11 @@ public class AppLogger {
 
 	/**
 	 * 警告ログを出力します。
-	 * @param code
-	 * @param message
-	 * @param th
-	 * @param className
-	 * @param methodName
+	 * @param code a log code
+	 * @param message a log message
+	 * @param th a throwable
+	 * @param className class name
+	 * @param methodName method name
 	 */
 	public static void warn(String code, String message, Throwable th, Object className, Object methodName) {
 		log(LoggerConst.LOG_LEVEL_WARN, code, message, th, className, methodName);
@@ -183,11 +183,11 @@ public class AppLogger {
 
 	/**
 	 * 電文ログを出力します。
-	 * @param code
-	 * @param message
-	 * @param className
-	 * @param methodName
-	 * @param body
+	 * @param code a log code
+	 * @param message a log message
+	 * @param className class name
+	 * @param methodName method name
+	 * @param body a telegram body
 	 */
 	public static void traceTelegram(String code, String message, Object className, Object methodName, String body) {
 	    logTelegram(LoggerConst.LOG_LEVEL_INFO, code, message, className, methodName, body);
@@ -208,7 +208,7 @@ public class AppLogger {
 
 	/**
 	 * [例外クラス用]スタックトレース書き出し文字列を作成します。
-	 * @param excp
+	 * @param excp a throwable
 	 * @return 例外出力
 	 */
 	private static String getStackTraceString(Throwable excp) {
@@ -233,7 +233,7 @@ public class AppLogger {
      * 電文ログ本文<br>
      * [Handled Exception End]<br>
 	 * </p>
-     * @param body
+     * @param body a telegram body
      * @return トレースログ出力
      */
     private static String getStackTraceString(String body) {

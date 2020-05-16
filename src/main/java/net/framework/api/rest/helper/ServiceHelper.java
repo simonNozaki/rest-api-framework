@@ -20,6 +20,7 @@ public class ServiceHelper {
 
 	/**
 	 * start a pipeline to build a output generator.
+	 * @param <T> generics of a value for an internal singleton class
 	 * @return the instance of ServiceOutBuilder, that has a generics of type T.
 	 */
 	protected static <T> ServiceOutBuilder<T> doPipeServiceOut() {
@@ -63,8 +64,8 @@ public class ServiceHelper {
 
 		/**
 		 * Set error codes.
-		 * @param codes
-		 * @return
+		 * @param codes an error code
+		 * @return a ServiceOutBuilder instance
 		 */
 		public ServiceOutBuilder<T> setErrors(List<String> codes) {
 			// Initialize an error object.
@@ -77,6 +78,7 @@ public class ServiceHelper {
 		 * Set a result of down layers like repositories.
 		 * This is an intermediate operation.
 		 * @param input a result
+		 * @param <V> generics of an input
 		 * @return ServiceOutBuilder
 		 */
 		public <V> ServiceOutBuilder<V> setResult(V input) {
@@ -86,7 +88,7 @@ public class ServiceHelper {
 		/**
 		 * Build an output of a service class based on the value and the error.
 		 * This is a terminal operation.
-		 * @return ServiceOut<T>
+		 * @return a ServiceOut instance
 		 */
 		public ServiceOut<T> build() {
 			ServiceOut<T> serviceOut = new ServiceOut<>();

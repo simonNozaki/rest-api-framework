@@ -21,7 +21,8 @@ public class ObjectInspector {
     /**
      * インプットの入力検査パイプラインを開始します.入力チェック操作はInspectorクラスが提供します.
      * @param input a value that is evaluated in the next pipelines.
-     * @return InputInspector<T>
+     * @param <T> generics of an input
+     * @return InputInspector
      */
     public static <T> Inspector<T> of(T input) {
         return new Inspector<>(input);
@@ -63,7 +64,7 @@ public class ObjectInspector {
          * @param message ログメッセージ
          * @return {@code Inspector}
          */
-        public <V> Inspector<T> log(String code, String message){
+        public Inspector<T> log(String code, String message){
             try{
                 AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(this.value));
                 return new Inspector<>(value);
@@ -96,7 +97,7 @@ public class ObjectInspector {
         /**
          * 入力がnullもしくは空の場合、エラーコードを設定します.
          * @param code an error code
-         * @return Inspector<T>
+         * @return Inspector
          */
         public Inspector<T> hasNullValue(String code){
             return this.satisfyPredicateWithInput(this.value, (T inputValue) -> ObjectUtil.isNullOrEmpty(this.value), code);
@@ -106,6 +107,7 @@ public class ObjectInspector {
          * プロパティの空チェック。空文字もしくはnullの場合エラーコードを設定します。
          * @param subject 被検査対象
          * @param code エラーコード
+         * @param <V> generics of a subject
          * @return Inspector
          */
         public <V> Inspector<T> isNull(V subject, String code){
@@ -117,6 +119,7 @@ public class ObjectInspector {
          * @param target a checked target object
          * @param max max length checked
          * @param code error code
+         * @param <V> generics of a target
          * @return an Inspector instance
          */
         public <V> Inspector<T> violateMaxLength(V target, int max, String code) {
@@ -131,6 +134,7 @@ public class ObjectInspector {
          * @param target a checked target object
          * @param length length checked
          * @param code error code
+         * @param <V> generics of a target
          * @return an Inspector instance
          */
         public <V> Inspector<T> violateSpecificLength(V target, int length, String code) {
@@ -155,6 +159,7 @@ public class ObjectInspector {
          * Evaluate a predicate for an iterable.
          * @param target a checked target object
          * @param code error codes
+         * @param predicate a predicate for a target valuation
          * @param <E> type parameter
          * @return an Inspector instance
          */

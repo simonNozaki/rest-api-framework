@@ -61,7 +61,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'net.framework.api.rest'
             artifactId = 'rest-api-framework'
-            version = '1.0.2'
+            version = '1.0.3'
             from(components.java)
         }
     }
@@ -105,7 +105,6 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives jar
     archives sourcesJar
-    archives javadocJar
 }
 
 wrapper {
@@ -116,8 +115,14 @@ test {
     useJUnitPlatform()
 }
 
+processResources.destinationDir = compileJava.destinationDir
+processResources.dependsOn(compileJava)
+
 jar {
-    manifest {
-        attributes 'Main-Class': 'Main'
+    from compileKotlin
+    from compileJava
+    from processResources
+    into('artifact') {
+        from configurations.runtimeClasspath
     }
 }

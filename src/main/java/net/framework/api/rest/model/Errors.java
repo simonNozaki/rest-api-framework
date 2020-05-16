@@ -11,7 +11,7 @@ public class Errors {
 
     /**
      * デフォルトコンストラクタ。
-     * @param codes
+     * @param codes an error codes list
      */
     public Errors(List<String> codes) {
         this.codes = codes;

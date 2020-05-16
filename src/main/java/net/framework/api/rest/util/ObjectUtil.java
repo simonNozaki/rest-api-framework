@@ -15,8 +15,9 @@ public class ObjectUtil {
 
     /**
      * オブジェクトの空、もしくはnullを検査します.
-     * @param input
-     * @return
+     * @param input target
+     * @param <T> generics of an input
+     * @return true if a target is null or empty
      */
     public static <T> boolean isNullOrEmpty(T input) {
         // 入力がnullのケース
@@ -35,7 +36,8 @@ public class ObjectUtil {
 	/**
 	 * 与えられた引数からリストを作成します。
 	 * @param t 一つ以上のオブジェクト、全て同じ型を指定する
-	 * @return List<T> 引数で与えられたオブジェクトを結合したリスト
+     * @param <T> generics of a variable parameters
+	 * @return List 引数で与えられたオブジェクトを結合したリスト
 	 */
 	public static  <T> List<T> convertToList(T...t) {
 		List<T> result = new ArrayList<>();
@@ -68,7 +70,8 @@ public class ObjectUtil {
 	/**
      * 任意の型のリストからStreamを返します.リストが空の場合、空のStreamを返却します。
      * @param list ストリームに変換するリスト
-     * @return Stream<T>
+     * @param <T> generics of a collection
+     * @return Stream
      */
     public static <T> Stream<T> getStream(Collection<T> list) {
         if(isNullOrEmpty(list)) {

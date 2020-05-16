@@ -20,7 +20,7 @@ public class RestControllerHelper {
 
     /**
      * レスポンスプロセッサを返します.
-     * @return ResponseProcessor<T>
+     * @return ResponseProcessor
      */
     protected static ResponseProcessor responseProcessBuilder() {
         return new ResponseProcessor();
@@ -64,6 +64,7 @@ public class RestControllerHelper {
         /**
          * プロセッサを開始します.
          * @param supplier レスポンスオブジェクトのサプライヤ
+         * @param <R> サプライヤのジェネリクス
          * @return ResponseProcessor ローカルな自分のクラス
          */
         public <R> ResponseProcessor of(Supplier<R> supplier) {
@@ -73,6 +74,7 @@ public class RestControllerHelper {
         /**
          * プロセッサを開始します。具体的な値でコンストラクタを呼び出します。
          * @param input 任意の入力値
+         * @param <R> 入力値のジェネリクス
          * @return ResponseProcessor ローカルな自分のクラス
          */
         public <R> ResponseProcessor with(R input) {
@@ -83,6 +85,7 @@ public class RestControllerHelper {
          * サービスクラスを実行します。正常、異常結果をそれぞれローカル変数に格納してパイプラインを継続します。<br>
          * これは中間操作です。
          * @param out サービスクラスの実行結果
+         * @param <R> サービスアウトのジェネリクス
          * @return ResponseProcessor 結果を入力にしたプロセッサ
          */
         public <R> ResponseProcessor executeService(ServiceOut<R> out) {
@@ -95,6 +98,7 @@ public class RestControllerHelper {
         /**
          * 生成したDTOに対する中間操作を提供します.
          * @param function a mapping function
+         * @param <R> ラムダ関数の戻り値のジェネリクス
          * @return a ResponseProcessor instance
          */
         public <R> ResponseProcessor map(Function<T, R> function) {
@@ -104,6 +108,8 @@ public class RestControllerHelper {
         /**
          * サービスクラスの結果を別のオブジェクトにマップします。
          * @param bifunction a mapping function with a value and an error
+         * @param <R> generics of a value
+         * @param <U> generics
          * @return a ResponseProcessor instance
          */
         public <U, R> ResponseProcessor<T> mapWithError(BiFunction<T, Errors, R> bifunction) {
@@ -113,7 +119,7 @@ public class RestControllerHelper {
         /**
          * 事前の操作の適正性を評価して、正しければそのまま値を返します.
          * @param predicate a condition
-         * @return ResponseProcessor<T>
+         * @return ResponseProcessor
          */
         public ResponseProcessor<T> test(Predicate<T> predicate) {
             if (predicate.test(value)) {
@@ -127,8 +133,9 @@ public class RestControllerHelper {
          * @param code a log code, nullable
          * @param message a log message, nullable
          * @param input a logged object
-         * @return ResponseProcessor<T>
-         * @throws IOException
+         * @param <V> generics of an input
+         * @return ResponseProcessor
+         * @throws IOException IO exception
          */
         public <V> ResponseProcessor<T> logOutput(String code, String message, V input) throws IOException {
             AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(input));
@@ -141,9 +148,9 @@ public class RestControllerHelper {
          * @param code a log code, nullable
          * @param message a log message, nullable
          * @return ResponseProcessor ローカルなResponseProcessorのインスタンスを返却します。
-         * @throws IOException
+         * @throws IOException IO exception
          */
-        public <V> ResponseProcessor log(String code, String message) throws IOException {
+        public ResponseProcessor log(String code, String message) throws IOException {
             AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(value));
             return new ResponseProcessor(value);
         }
