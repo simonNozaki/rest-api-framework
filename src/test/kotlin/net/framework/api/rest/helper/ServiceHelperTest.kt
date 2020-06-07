@@ -1,7 +1,7 @@
 package net.framework.api.rest.helper
 
-import net.framework.api.rest.data.TestCustomer
-import net.framework.api.rest.data.TestItem
+import net.framework.api.rest.model.Customer
+import net.framework.api.rest.model.Item
 import net.framework.api.rest.model.Errors
 import net.framework.api.rest.model.ServiceOut
 import org.junit.jupiter.api.Test
@@ -19,8 +19,8 @@ class ServiceHelperTest : ServiceHelper() {
      */
     @Test
     fun test001_001() {
-        val testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
-        val out: ServiceOut<TestItem?> = doPipeServiceOut<TestItem>()
+        val testItem: Item? = Item("merchant001", "hat", 1000, 1, Customer("customer001", "Patrick Collison", 0, 31))
+        val out: ServiceOut<Item?> = doPipeServiceOut<Item>()
                 .setResult(testItem)
                 .build()
 
@@ -71,9 +71,9 @@ class ServiceHelperTest : ServiceHelper() {
      */
     @Test
     fun test001_004() {
-        val testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+        val testItem: Item? = Item("merchant001", "hat", 1000, 1, Customer("customer001", "Patrick Collison", 0, 31))
         val errors = Errors().apply { codes = mutableListOf("system error") }
-        val out: ServiceOut<TestItem?> = doPipeServiceOut<TestItem>()
+        val out: ServiceOut<Item?> = doPipeServiceOut<Item>()
             .setResult(testItem)
             .setErrors(errors.codes)
             .build()

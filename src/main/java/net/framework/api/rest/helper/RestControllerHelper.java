@@ -1,6 +1,5 @@
 package net.framework.api.rest.helper;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import net.framework.api.rest.model.Errors;
 import net.framework.api.rest.model.ServiceOut;
 import net.framework.api.rest.config.AppLogger;
@@ -22,10 +21,9 @@ public class RestControllerHelper {
      * レスポンスプロセッサを返します.
      * @return ResponseProcessor
      */
-    protected static ResponseProcessor responseProcessBuilder() {
-        return new ResponseProcessor();
+    protected static <T> ResponseProcessor<T> responseProcessBuilder() {
+        return new ResponseProcessor<T>();
     }
-
 
     /**
      * レスポンス共通プロセッサクラスです.レスポンス生成に必要な機能を提供します.
@@ -67,7 +65,7 @@ public class RestControllerHelper {
          * @param <R> サプライヤのジェネリクス
          * @return ResponseProcessor ローカルな自分のクラス
          */
-        public <R> ResponseProcessor of(Supplier<R> supplier) {
+        public <R> ResponseProcessor<R> of(Supplier<R> supplier) {
             return new ResponseProcessor(supplier.get());
         }
 
@@ -138,7 +136,9 @@ public class RestControllerHelper {
          * @throws IOException IO exception
          */
         public <V> ResponseProcessor<T> logOutput(String code, String message, V input) throws IOException {
-            AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(input));
+            AppLogger.traceTelegram(
+                    code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), MappingSingleton.Companion.getMapper().toJson(this.value)
+            );
             return new ResponseProcessor(value);
         }
 
@@ -151,7 +151,9 @@ public class RestControllerHelper {
          * @throws IOException IO exception
          */
         public ResponseProcessor log(String code, String message) throws IOException {
-            AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(value));
+            AppLogger.traceTelegram(
+                    code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), MappingSingleton.Companion.getMapper().toJson(this.value)
+            );
             return new ResponseProcessor(value);
         }
 

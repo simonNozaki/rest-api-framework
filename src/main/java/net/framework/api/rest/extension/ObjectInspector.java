@@ -1,11 +1,10 @@
-package net.framework.api.rest.util;
+package net.framework.api.rest.extension;
 
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import net.framework.api.rest.helper.MappingSingleton;
 import net.framework.api.rest.model.Errors;
 import net.framework.api.rest.config.AppLogger;
 import net.framework.api.rest.constant.AppConst;
@@ -66,7 +65,9 @@ public class ObjectInspector {
          */
         public Inspector<T> log(String code, String message){
             try{
-                AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(this.value));
+                AppLogger.traceTelegram(
+                        code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), MappingSingleton.Companion.getMapper().toJson(this.value)
+                );
                 return new Inspector<>(value);
             }catch(Exception e){
                 AppLogger.error(null, AppConst.SYSTEM_ERROR, e, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName());
@@ -85,7 +86,9 @@ public class ObjectInspector {
         public <V> Inspector<T> peakError(String code, String message) {
             try{
                 if(!ObjectUtil.isNullOrEmpty(this.errors.getCodes())) {
-                    AppLogger.traceTelegram(code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), new ObjectMapper().writeValueAsString(this.errors));
+                    AppLogger.traceTelegram(
+                            code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), MappingSingleton.Companion.getMapper().toJson(this.value)
+                    );
                 }
                 return new Inspector<>(value, errors);
             }catch(Exception e){

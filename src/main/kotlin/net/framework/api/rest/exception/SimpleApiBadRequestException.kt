@@ -5,7 +5,7 @@ import java.lang.RuntimeException
 /**
  * Web APIクライアントのBadRequest用実行時例外クラス。
  */
-class WebApiBadRequestException: RuntimeException {
+class SimpleApiBadRequestException: RuntimeException {
 
     /**
      * デフォルトコンストラクタ、メッセージあり

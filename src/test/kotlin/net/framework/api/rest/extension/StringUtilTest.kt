@@ -1,4 +1,4 @@
-package net.framework.api.rest.util
+package net.framework.api.rest.extension
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*

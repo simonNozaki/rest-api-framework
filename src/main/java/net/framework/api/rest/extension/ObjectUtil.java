@@ -1,4 +1,4 @@
-package net.framework.api.rest.util;
+package net.framework.api.rest.extension;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package net.framework.api.rest.util;
+package net.framework.api.rest.extension;
 
 /**
  * 文字列操作のユーティリティクラス。

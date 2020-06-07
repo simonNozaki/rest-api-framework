@@ -1,10 +1,10 @@
-package net.framework.api.rest.util
+package net.framework.api.rest.extension
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import net.framework.api.rest.data.Order
+import net.framework.api.rest.model.Order
 import net.framework.api.rest.model.Errors
-import net.framework.api.rest.data.TestCustomer
-import net.framework.api.rest.data.TestItem
+import net.framework.api.rest.model.Customer
+import net.framework.api.rest.model.Item
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertAll
@@ -21,7 +21,7 @@ class ObjectInspectorTest {
     @Test
     fun test001_001() {
 
-        var testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+        var testItem: Item? = Item("merchant001", "hat", 1000, 1, Customer("customer001", "Patrick Collison", 0, 31))
 
         // エラーの構築
         var errors: Errors = ObjectInspector.of(testItem)
@@ -40,7 +40,7 @@ class ObjectInspectorTest {
      */
     @Test
     fun test001_002() {
-        val testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+        val testItem: Item? = Item("merchant001", "hat", 1000, 1, Customer("customer001", "Patrick Collison", 0, 31))
 
         // エラーの構築
         val errors: Errors = ObjectInspector.of(testItem)
@@ -56,7 +56,7 @@ class ObjectInspectorTest {
      */
     @Test
     fun test001_003() {
-        val testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+        val testItem: Item? = Item("merchant001", "hat", 1000, 1, Customer("customer001", "Patrick Collison", 0, 31))
 
         // エラーの構築
         val errors: Errors = ObjectInspector.of(testItem)
@@ -72,7 +72,7 @@ class ObjectInspectorTest {
      */
     @Test
     fun test001_004() {
-        var testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+        var testItem: Item? = Item("merchant001", "hat", 1000, 1, Customer("customer001", "Patrick Collison", 0, 31))
 
         // エラーの構築
         var errors: Errors = ObjectInspector.of(testItem)
@@ -88,7 +88,7 @@ class ObjectInspectorTest {
      */
     @Test
     fun test001_005() {
-        var testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+        var testItem: Item? = Item("merchant001", "hat", 1000, 1, Customer("customer001", "Patrick Collison", 0, 31))
 
         // エラーの構築
         var errors: Errors = ObjectInspector.of(testItem)
@@ -104,7 +104,7 @@ class ObjectInspectorTest {
      */
     @Test
     fun test001_006() {
-        var testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+        var testItem: Item? = Item("merchant001", "hat", 1000, 1, Customer("customer001", "Patrick Collison", 0, 31))
 
         // エラーの構築
         var errors: Errors = ObjectInspector.of(testItem)
@@ -120,11 +120,11 @@ class ObjectInspectorTest {
      */
     @Test
     fun test001_007() {
-        var testItem: TestItem? = TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+        var testItem: Item? = Item("merchant001", "hat", 1000, 1, Customer("customer001", "Patrick Collison", 0, 31))
 
         // エラーの構築
         var errors: Errors = ObjectInspector.of(testItem)
-            .peakError<TestItem>("", "")
+            .peakError<Item>("", "")
             .build()
 
         assertEquals(errors.codes.isNullOrEmpty(), true)
@@ -137,7 +137,7 @@ class ObjectInspectorTest {
     @Test
     fun test002() {
 
-        var testItem: TestItem? = TestItem("merchant001", "", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+        var testItem: Item? = Item("merchant001", "", 1000, 1, Customer("customer001", "Patrick Collison", 0, 31))
         // エラーの構築
         var errors: Errors = ObjectInspector.of(testItem)
                 .test({it?.name.isNullOrBlank()}, "name is blank")
@@ -153,7 +153,7 @@ class ObjectInspectorTest {
      */
     @Test
     fun test003() {
-        var testItem: TestItem? = TestItem("merchant001", null, 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+        var testItem: Item? = Item("merchant001", null, 1000, 1, Customer("customer001", "Patrick Collison", 0, 31))
         // エラーの構築
         var errors: Errors = ObjectInspector.of(testItem)
                 .isNull(testItem?.name, "name is null")
@@ -169,7 +169,7 @@ class ObjectInspectorTest {
      */
     @Test
     fun test004() {
-        var testItem: TestItem? = null
+        var testItem: Item? = null
         // エラーの構築
         var errors: Errors = ObjectInspector.of(testItem)
                 .isNull(testItem, "item is null")
@@ -185,7 +185,7 @@ class ObjectInspectorTest {
      */
     @Test
     fun test005() {
-        var testItem: TestItem? = TestItem("", null, 1000, 1, TestCustomer("", "Patrick Collison", 0, 31))
+        var testItem: Item? = Item("", null, 1000, 1, Customer("", "Patrick Collison", 0, 31))
         // エラーの構築
         var errors: Errors = ObjectInspector.of(testItem)
                 .test({ it?.id.isNullOrBlank() }, "id is null or blank")
@@ -210,7 +210,7 @@ class ObjectInspectorTest {
      */
     @Test
     fun test006() {
-        var testItem: TestItem? = TestItem("merchant", null, 1000, 1, TestCustomer("", "Patrick Collison", 0, 31))
+        var testItem: Item? = Item("merchant", null, 1000, 1, Customer("", "Patrick Collison", 0, 31))
         // エラーの構築
         var errors: Errors = ObjectInspector.of(testItem)
                 .violateSpecificLength(testItem?.id, 10, "digits of id is not 10")
@@ -228,7 +228,7 @@ class ObjectInspectorTest {
      */
     @Test
     fun test007() {
-        var testItem: TestItem? = TestItem(null, null, 1000, 1, TestCustomer("", "Patrick Collison", 0, 31))
+        var testItem: Item? = Item(null, null, 1000, 1, Customer("", "Patrick Collison", 0, 31))
         // エラーの構築
         var errors: Errors = ObjectInspector.of(testItem)
                 .violateSpecificLength(testItem?.id, 10, "digits of id is null")
@@ -246,7 +246,7 @@ class ObjectInspectorTest {
      */
     @Test
     fun test008() {
-        var testItem: TestItem? = TestItem("", null, 1000, 1, TestCustomer("", "Patrick Collison", 0, 31))
+        var testItem: Item? = Item("", null, 1000, 1, Customer("", "Patrick Collison", 0, 31))
         // エラーの構築
         var errors: Errors = ObjectInspector.of(testItem)
                 .violateSpecificLength(testItem?.id, 10, "digits of id is null")
@@ -264,7 +264,7 @@ class ObjectInspectorTest {
      */
     @Test
     fun test009() {
-        val testItem: TestItem? = TestItem("aaaaaaaaaaaa", null, 1000, 1, TestCustomer("", "Patrick Collison", 0, 31))
+        val testItem: Item? = Item("aaaaaaaaaaaa", null, 1000, 1, Customer("", "Patrick Collison", 0, 31))
         // エラーの構築
         val errors: Errors = ObjectInspector.of(testItem)
             .violateMaxLength(testItem?.id, 10, "digits of id is over 10")
@@ -282,7 +282,7 @@ class ObjectInspectorTest {
      */
     @Test
     fun test010() {
-        val testItem: TestItem? = null
+        val testItem: Item? = null
         // エラーの構築
         val errors: Errors = ObjectInspector.of(testItem)
             .hasNullValue("request is null")
@@ -304,8 +304,8 @@ class ObjectInspectorTest {
                 "20200220-00001",
                 "merchant001",
                 mutableListOf(
-                        TestItem("merchant001", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31)),
-                        TestItem("merchant001", "bag", 2000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+                        Item("merchant001", "hat", 1000, 1, Customer("customer001", "Patrick Collison", 0, 31)),
+                        Item("merchant001", "bag", 2000, 1, Customer("customer001", "Patrick Collison", 0, 31))
                 )
         )
 
@@ -326,8 +326,8 @@ class ObjectInspectorTest {
                 "20200220-00001",
                 "merchant001",
                 mutableListOf(
-                        TestItem("", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31)),
-                        TestItem("merchant001", "bag", 2000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+                        Item("", "hat", 1000, 1, Customer("customer001", "Patrick Collison", 0, 31)),
+                        Item("merchant001", "bag", 2000, 1, Customer("customer001", "Patrick Collison", 0, 31))
                 )
         )
 
@@ -351,8 +351,8 @@ class ObjectInspectorTest {
                 "20200220-00001",
                 "merchant001",
                 mutableListOf(
-                        TestItem("", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31)),
-                        TestItem("", "bag", 2000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31))
+                        Item("", "hat", 1000, 1, Customer("customer001", "Patrick Collison", 0, 31)),
+                        Item("", "bag", 2000, 1, Customer("customer001", "Patrick Collison", 0, 31))
                 )
         )
 
@@ -379,8 +379,8 @@ class ObjectInspectorTest {
                 "20200220-00001",
                 "merchant001",
                 mutableListOf(
-                        TestItem("", "hat", 1000, 1, TestCustomer("customer001", "Patrick Collison", 0, 31)),
-                        TestItem("merchant001", "bag", 2000, 1, null)
+                        Item("", "hat", 1000, 1, Customer("customer001", "Patrick Collison", 0, 31)),
+                        Item("merchant001", "bag", 2000, 1, null)
                 )
         )
 

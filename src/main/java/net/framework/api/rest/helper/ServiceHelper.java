@@ -1,12 +1,10 @@
 package net.framework.api.rest.helper;
 
-import net.framework.api.rest.config.AppLogger;
 import net.framework.api.rest.model.Errors;
 import net.framework.api.rest.model.ServiceOut;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
