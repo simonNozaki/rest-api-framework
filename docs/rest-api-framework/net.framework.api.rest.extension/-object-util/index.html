@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ObjectUtil - rest-api-framework</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">rest-api-framework</a>&nbsp;/&nbsp;<a href="../index.html">net.framework.api.rest.extension</a>&nbsp;/&nbsp;<a href="./index.html">ObjectUtil</a><br/>
+<br/>
+<h1>ObjectUtil</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">ObjectUtil</span></code>
+<p>オブジェクト操作のユーティリティクラス。</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">ObjectUtil</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>オブジェクト操作のユーティリティクラス。</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="convert-to-list.html">convertToList</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">static</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">convertToList</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="net.framework.api.rest.extension.ObjectUtil$convertToList(kotlin.Array((net.framework.api.rest.extension.ObjectUtil.convertToList.T)))/t">t</span><span class="symbol">:</span>&nbsp;<a href="convert-to-list.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html"><span class="identifier">MutableList</span></a><span class="symbol">&lt;</span><a href="convert-to-list.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>与えられた引数からリストを作成します。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-stream.html">getStream</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">static</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">getStream</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.extension.ObjectUtil$getStream(kotlin.collections.MutableCollection((net.framework.api.rest.extension.ObjectUtil.getStream.T)))/list">list</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-collection/index.html"><span class="identifier">MutableCollection</span></a><span class="symbol">&lt;</span><a href="get-stream.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Stream</span><span class="symbol">&lt;</span><a href="get-stream.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>任意の型のリストからStreamを返します.リストが空の場合、空のStreamを返却します。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-null-or-empty.html">isNullOrEmpty</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">static</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">isNullOrEmpty</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.extension.ObjectUtil$isNullOrEmpty(net.framework.api.rest.extension.ObjectUtil.isNullOrEmpty.T)/input">input</span><span class="symbol">:</span>&nbsp;<a href="is-null-or-empty.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>オブジェクトの空、もしくはnullを検査します.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-uri.html">isUri</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">static</span> <span class="keyword">fun </span><span class="identifier">isUri</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.extension.ObjectUtil$isUri(kotlin.String)/subject">subject</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>引数がURLの形式に則っていることを確認します。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

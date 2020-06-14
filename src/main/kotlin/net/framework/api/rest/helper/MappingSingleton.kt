@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 
 /**
- * JSONマッパーシングルトンクラス。
+ * JSON mapper singleton class, wrapping `Gson`
  */
 class MappingSingleton {
 

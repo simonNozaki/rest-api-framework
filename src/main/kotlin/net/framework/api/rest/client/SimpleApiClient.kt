@@ -13,16 +13,22 @@ import java.nio.charset.StandardCharsets
 
 /**
  * Simple API Client class, wrapping HttpClient included in java.net package.
- * @code SimpleApiClient.setTargetUri().setHeader("", "").get().invoke(Target.class)
+ * ```
+ * SimpleApiClient
+ *     .setTargetUri()
+ *     .setHeader("info1", "value1")
+ *     .setHeader("info2", "value2")
+ *     .get()
+ *     .invoke(Target.class)
+ * ```
  */
 class SimpleApiClient {
 
     companion object ClientSingleton {
 
-        private lateinit var httpHeaderKey: String
-        private lateinit var httpHeaderValue: String
         private lateinit var targetUri: String
         private lateinit var httpRequest: HttpRequest
+        private val headerMap: MutableMap<String, String> = mutableMapOf()
 
         private const val HTTP_METHOD_POST: String = "POST"
         private const val HTTP_METHOD_GET: String = "GET"
@@ -48,8 +54,7 @@ class SimpleApiClient {
          * @return ClientSingleton object
          */
         fun setHeader(headerKey: String, headerValue: String): ClientSingleton {
-            this.httpHeaderKey = headerKey
-            this.httpHeaderValue = headerValue
+            this.headerMap[headerKey] = headerValue
             return ClientSingleton
         }
 
@@ -119,19 +124,24 @@ class SimpleApiClient {
         private fun <T> buildRequest(method: String, value: T?): HttpRequest {
             if (method != HTTP_METHOD_GET && ObjectUtil.isNullOrEmpty(value)) throw SimpleApiBadRequestException(AppConst.WEB_API_REQUEST_ERROR)
 
-            val builder: HttpRequest.Builder = HttpRequest.newBuilder()
-                .uri(URI.create(targetUri))
-                .header(this.httpHeaderKey, this.httpHeaderValue)
+            var builder: HttpRequest.Builder = HttpRequest.newBuilder().uri(URI.create(targetUri))
+            // Add header with header k/v pairs.
+            for (pair in headerMap) builder = builder.header(pair.key, pair.value)
 
             return when (method) {
-                HTTP_METHOD_POST -> builder
-                    .POST(HttpRequest.BodyPublishers.ofString(MappingSingleton.getMapper().toJson(value)))
-                    .build()
+                HTTP_METHOD_POST ->
+                    builder
+                        .POST(HttpRequest.BodyPublishers.ofString(MappingSingleton.getMapper().toJson(value)))
+                        .build()
                 HTTP_METHOD_GET -> builder.GET().build()
-                HTTP_METHOD_PUT -> builder
-                    .PUT(HttpRequest.BodyPublishers.ofString(MappingSingleton.getMapper().toJson(value)))
-                    .build()
-                HTTP_METHOD_DELETE -> builder.DELETE().build()
+                HTTP_METHOD_PUT ->
+                    builder
+                        .PUT(HttpRequest.BodyPublishers.ofString(MappingSingleton.getMapper().toJson(value)))
+                        .build()
+                HTTP_METHOD_DELETE ->
+                    builder
+                        .method(HTTP_METHOD_DELETE, HttpRequest.BodyPublishers.ofString(MappingSingleton.getMapper().toJson(value)))
+                        .build()
                 else -> builder.build()
             }
         }

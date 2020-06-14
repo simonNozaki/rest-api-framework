@@ -1,0 +1,13 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:net.framework.api.rest.extension$increment(kotlin.String, kotlin.Int)net.framework.api.rest.extension/kotlin.-string/increment.html
+$dokka.location:net.framework.api.rest.extension$increment(kotlin.String, kotlin.Int, kotlin.Int)net.framework.api.rest.extension/kotlin.-string/increment.html
+$dokka.location:net.framework.api.rest.extension$printStack(kotlin.String, kotlin.String)net.framework.api.rest.extension/kotlin.-string/print-stack.html
+net.framework.api.rest.client
+net.framework.api.rest.config
+net.framework.api.rest.config.logger
+net.framework.api.rest.constant
+net.framework.api.rest.exception
+net.framework.api.rest.extension
+net.framework.api.rest.helper
+net.framework.api.rest.model

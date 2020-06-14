@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AppLogger - rest-api-framework</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">rest-api-framework</a>&nbsp;/&nbsp;<a href="../index.html">net.framework.api.rest.config</a>&nbsp;/&nbsp;<a href="./index.html">AppLogger</a><br/>
+<br/>
+<h1>AppLogger</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">AppLogger</span></code>
+<p>共通ログ出力設定クラスです.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">AppLogger</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>共通ログ出力設定クラスです.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="error.html">error</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">static</span> <span class="keyword">fun </span><span class="identifier">error</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.config.AppLogger$error(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/code">code</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$error(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$error(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/th">th</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$error(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/className">className</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$error(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/methodName">methodName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>エラーログを出力します。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="trace.html">trace</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">static</span> <span class="keyword">fun </span><span class="identifier">trace</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.config.AppLogger$trace(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/code">code</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$trace(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$trace(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/th">th</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$trace(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/className">className</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$trace(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/methodName">methodName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>トレースログを出力します。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="trace-telegram.html">traceTelegram</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">static</span> <span class="keyword">fun </span><span class="identifier">traceTelegram</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.config.AppLogger$traceTelegram(kotlin.String, kotlin.String, kotlin.Any, kotlin.Any, kotlin.String)/code">code</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$traceTelegram(kotlin.String, kotlin.String, kotlin.Any, kotlin.Any, kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$traceTelegram(kotlin.String, kotlin.String, kotlin.Any, kotlin.Any, kotlin.String)/className">className</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$traceTelegram(kotlin.String, kotlin.String, kotlin.Any, kotlin.Any, kotlin.String)/methodName">methodName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$traceTelegram(kotlin.String, kotlin.String, kotlin.Any, kotlin.Any, kotlin.String)/body">body</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>電文ログを出力します。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="warn.html">warn</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">static</span> <span class="keyword">fun </span><span class="identifier">warn</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.config.AppLogger$warn(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/code">code</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$warn(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$warn(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/th">th</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$warn(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/className">className</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.config.AppLogger$warn(kotlin.String, kotlin.String, kotlin.Throwable, kotlin.Any, kotlin.Any)/methodName">methodName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>警告ログを出力します。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

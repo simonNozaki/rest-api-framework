@@ -2,9 +2,11 @@ buildscript {
     ext.kotlin_version = '1.3.61'
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.16"
     }
 }
 
@@ -12,8 +14,9 @@ apply(plugin: 'java')
 apply(plugin: 'kotlin')
 apply(plugin: 'maven-publish')
 apply(plugin: 'java-library')
+apply(plugin: 'org.jetbrains.dokka')
 
-version = '1.0.0'
+version = '1.1.0'
 group = 'net.framework.api.rest'
 
 repositories {
@@ -66,7 +69,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'net.framework.api.rest'
             artifactId = 'rest-api-framework'
-            version = '1.0.3'
+            version = '1.1.0'
             from(components.java)
         }
     }
@@ -122,11 +125,6 @@ test {
 processResources.destinationDir = compileJava.destinationDir
 processResources.dependsOn(compileJava)
 
-jar {
-    from compileKotlin
-    from compileJava
-    from processResources
-    into('artifact') {
-        from configurations.runtimeClasspath
-    }
+dokka {
+    outputDirectory = 'docs'
 }

@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SimpleApiClient - rest-api-framework</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">rest-api-framework</a>&nbsp;/&nbsp;<a href="../index.html">net.framework.api.rest.client</a>&nbsp;/&nbsp;<a href="./index.html">SimpleApiClient</a><br/>
+<br/>
+<h1>SimpleApiClient</h1>
+<code><span class="keyword">class </span><span class="identifier">SimpleApiClient</span></code>
+<p>Simple API Client class, wrapping HttpClient included in java.net package.</p>
+<pre><code>SimpleApiClient
+    .setTargetUri()
+    .setHeader("info1", "value1")
+    .setHeader("info2", "value2")
+    .get()
+    .invoke(Target.class)
+</code></pre>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">SimpleApiClient</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Simple API Client class, wrapping HttpClient included in java.net package.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="delete.html">delete</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">delete</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.client.SimpleApiClient.ClientSingleton$delete(net.framework.api.rest.client.SimpleApiClient.ClientSingleton.delete.T)/value">value</span><span class="symbol">:</span>&nbsp;<a href="delete.html#T"><span class="identifier">T</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">SimpleApiClient.ClientSingleton</span></code>
+<p>Ready to call an API with DELETE method.
+an Intermediate operation.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get.html">get</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">get</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">SimpleApiClient.ClientSingleton</span></code>
+<p>Ready to call an API with GET method.
+an Intermediate operation.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="invoke.html">invoke</a></p>
+</td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">R</span><span class="symbol">&gt;</span> <span class="identifier">invoke</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.client.SimpleApiClient.ClientSingleton$invoke(java.lang.Class((net.framework.api.rest.client.SimpleApiClient.ClientSingleton.invoke.R)))/type">type</span><span class="symbol">:</span>&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><a href="invoke.html#R"><span class="identifier">R</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="invoke.html#R"><span class="identifier">R</span></a></code>
+<p>Send a request to API and deserialize a response with a type of method argument.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="post.html">post</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">post</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.client.SimpleApiClient.ClientSingleton$post(net.framework.api.rest.client.SimpleApiClient.ClientSingleton.post.T)/value">value</span><span class="symbol">:</span>&nbsp;<a href="post.html#T"><span class="identifier">T</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">SimpleApiClient.ClientSingleton</span></code>
+<p>Ready to call an API with POST method.
+an Intermediate operation.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="put.html">put</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">put</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.client.SimpleApiClient.ClientSingleton$put(net.framework.api.rest.client.SimpleApiClient.ClientSingleton.put.T)/value">value</span><span class="symbol">:</span>&nbsp;<a href="put.html#T"><span class="identifier">T</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">SimpleApiClient.ClientSingleton</span></code>
+<p>Ready to call an API with PUT method.
+an Intermediate operation.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-header.html">setHeader</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setHeader</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.client.SimpleApiClient.ClientSingleton$setHeader(kotlin.String, kotlin.String)/headerKey">headerKey</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.client.SimpleApiClient.ClientSingleton$setHeader(kotlin.String, kotlin.String)/headerValue">headerValue</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">SimpleApiClient.ClientSingleton</span></code>
+<p>Set a http header and value.
+an Intermediate operation.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-target-uri.html">setTargetUri</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setTargetUri</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.client.SimpleApiClient.ClientSingleton$setTargetUri(kotlin.String)/uri">uri</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">SimpleApiClient.ClientSingleton</span></code>
+<p>Set a target uri.
+an Intermediate operation.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

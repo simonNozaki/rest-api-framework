@@ -3,14 +3,17 @@ package net.framework.api.rest.model;
 import java.util.List;
 
 /**
- * 共通エラーオブジェクト。
+ * Common error object
  */
-public class Errors {
+public class Errors extends AbstractErrors {
 
+	/**
+	 * Default constructor
+	 */
     public Errors() {}
 
     /**
-     * デフォルトコンストラクタ。
+     * Default constructor
      * @param codes an error codes list
      */
     public Errors(List<String> codes) {
@@ -18,7 +21,7 @@ public class Errors {
     }
 
 	/**
-	 * エラーコードリスト
+	 * Error list
 	 */
 	private List<String> codes;
 
@@ -35,10 +38,11 @@ public class Errors {
 		this.codes = codes;
 	}
 
+	@Override
 	public String getId() {
 		return id;
 	}
-
+	@Override
 	public void setId(String id) {
 		this.id = id;
 	}

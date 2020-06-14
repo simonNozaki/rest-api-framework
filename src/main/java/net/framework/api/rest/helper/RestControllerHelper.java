@@ -1,5 +1,6 @@
 package net.framework.api.rest.helper;
 
+import net.framework.api.rest.model.AbstractErrors;
 import net.framework.api.rest.model.Errors;
 import net.framework.api.rest.model.ServiceOut;
 import net.framework.api.rest.config.AppLogger;
@@ -13,24 +14,27 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /**
- * Controllerのヘルパークラス。
+ * Controller helper class
  */
 public class RestControllerHelper {
 
     /**
-     * レスポンスプロセッサを返します.
+     * Return ResponseProcessor
+     * @param <T> type parameter for value
      * @return ResponseProcessor
      */
     protected static <T> ResponseProcessor<T> responseProcessBuilder() {
-        return new ResponseProcessor<T>();
+        return new ResponseProcessor<>();
     }
 
     /**
-     * レスポンス共通プロセッサクラスです.レスポンス生成に必要な機能を提供します.
+     * Response singleton
+     * concrete class for building API response
+     * @param <T> type parameter for value of singleton
      */
     protected static final class ResponseProcessor<T> {
 
-        private T value;
+        private final T value;
 
         private Errors errors;
 
@@ -66,7 +70,7 @@ public class RestControllerHelper {
          * @return ResponseProcessor ローカルな自分のクラス
          */
         public <R> ResponseProcessor<R> of(Supplier<R> supplier) {
-            return new ResponseProcessor(supplier.get());
+            return new ResponseProcessor<>(supplier.get());
         }
 
         /**
@@ -75,8 +79,8 @@ public class RestControllerHelper {
          * @param <R> 入力値のジェネリクス
          * @return ResponseProcessor ローカルな自分のクラス
          */
-        public <R> ResponseProcessor with(R input) {
-            return new ResponseProcessor(input);
+        public <R> ResponseProcessor<R> with(R input) {
+            return new ResponseProcessor<>(input);
         }
 
         /**
@@ -84,13 +88,13 @@ public class RestControllerHelper {
          * これは中間操作です。
          * @param out サービスクラスの実行結果
          * @param <R> サービスアウトのジェネリクス
-         * @return ResponseProcessor 結果を入力にしたプロセッサ
+         * @return ResponseProcessor result inputted processor
          */
-        public <R> ResponseProcessor executeService(ServiceOut<R> out) {
+        public <R> ResponseProcessor<R> executeService(ServiceOut<R> out) {
             Optional.ofNullable(out.getErrors()).ifPresent((Errors serviceOutErrors) -> {
                 this.errors.getCodes().addAll(serviceOutErrors.getCodes());
             });
-            return new ResponseProcessor(out.getValue(), out.getErrors());
+            return new ResponseProcessor<>(out.getValue(), out.getErrors());
         }
 
         /**
@@ -99,8 +103,8 @@ public class RestControllerHelper {
          * @param <R> ラムダ関数の戻り値のジェネリクス
          * @return a ResponseProcessor instance
          */
-        public <R> ResponseProcessor map(Function<T, R> function) {
-            return new ResponseProcessor(function.apply(value));
+        public <R> ResponseProcessor<R> map(Function<T, R> function) {
+            return new ResponseProcessor<>(function.apply(value));
         }
 
         /**
@@ -110,7 +114,7 @@ public class RestControllerHelper {
          * @param <U> generics
          * @return a ResponseProcessor instance
          */
-        public <U, R> ResponseProcessor<T> mapWithError(BiFunction<T, Errors, R> bifunction) {
+        public <U, R> ResponseProcessor<T> mapWithError(BiFunction<T, AbstractErrors, R> bifunction) {
             return new ResponseProcessor(bifunction.apply(value, errors));
         }
 
@@ -123,11 +127,12 @@ public class RestControllerHelper {
             if (predicate.test(value)) {
                 return new ResponseProcessor<>(value);
             }
-            return new ResponseProcessor();
+            return new ResponseProcessor<>();
         }
 
         /**
-         * 手動ログ出力機能を提供します。これは中間操作です。
+         * Offer manual logging function.
+         * intermediate manipulation.
          * @param code a log code, nullable
          * @param message a log message, nullable
          * @param input a logged object
@@ -139,7 +144,7 @@ public class RestControllerHelper {
             AppLogger.traceTelegram(
                     code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), MappingSingleton.Companion.getMapper().toJson(this.value)
             );
-            return new ResponseProcessor(value);
+            return new ResponseProcessor<>(value);
         }
 
         /**
@@ -150,11 +155,11 @@ public class RestControllerHelper {
          * @return ResponseProcessor ローカルなResponseProcessorのインスタンスを返却します。
          * @throws IOException IO exception
          */
-        public ResponseProcessor log(String code, String message) throws IOException {
+        public ResponseProcessor<T> log(String code, String message) throws IOException {
             AppLogger.traceTelegram(
                     code, message, this.getClass(), new Object(){}.getClass().getEnclosingMethod().getName(), MappingSingleton.Companion.getMapper().toJson(this.value)
             );
-            return new ResponseProcessor(value);
+            return new ResponseProcessor<>(value);
         }
 
         /**

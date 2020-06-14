@@ -1,0 +1,103 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ObjectInspector.Inspector - rest-api-framework</title>
+<link rel="stylesheet" href="../../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../../index.html">rest-api-framework</a>&nbsp;/&nbsp;<a href="../../index.html">net.framework.api.rest.extension</a>&nbsp;/&nbsp;<a href="../index.html">ObjectInspector</a>&nbsp;/&nbsp;<a href="./index.html">Inspector</a><br/>
+<br/>
+<h1>Inspector</h1>
+<code><span class="keyword">class </span><span class="identifier">Inspector</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
+<p>入力検査機能を提供するクラスです.</p>
+<h3>Parameters</h3>
+<p><a name="&lt;T&gt;"></a>
+<code><T></code> - type parameter</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="build.html">build</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">build</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../../net.framework.api.rest.model/-errors/index.html"><span class="identifier">Errors</span></a></code>
+<p>エラーを昇順に構築します。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="has-null-value.html">hasNullValue</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">hasNullValue</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$hasNullValue(kotlin.String)/code">code</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Inspector</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>入力がnullもしくは空の場合、エラーコードを設定します.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-null.html">isNull</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">V</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">isNull</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$isNull(net.framework.api.rest.extension.ObjectInspector.Inspector.isNull.V, kotlin.String)/subject">subject</span><span class="symbol">:</span>&nbsp;<a href="is-null.html#V"><span class="identifier">V</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$isNull(net.framework.api.rest.extension.ObjectInspector.Inspector.isNull.V, kotlin.String)/code">code</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Inspector</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>プロパティの空チェック。空文字もしくはnullの場合エラーコードを設定します。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="log.html">log</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">log</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$log(kotlin.String, kotlin.String)/code">code</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$log(kotlin.String, kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Inspector</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p><code>of</code>メソッドで初期化した検査対象をJSON形式でログ出力します。 JSONシリアライズに失敗等システムエラーが発生した場合、パイプラインを継続しつつログ出力します。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="peak-error.html">peakError</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">V</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">peakError</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$peakError(kotlin.String, kotlin.String)/code">code</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$peakError(kotlin.String, kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Inspector</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>Peak an error. Recommended to use this method after methods like <code>isNull</code>, <code>hasNullValue</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="test.html">test</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">test</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$test(java.util.function.Predicate((net.framework.api.rest.extension.ObjectInspector.Inspector.T)), kotlin.String)/predicate">predicate</span><span class="symbol">:</span>&nbsp;<span class="identifier">Predicate</span><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$test(java.util.function.Predicate((net.framework.api.rest.extension.ObjectInspector.Inspector.T)), kotlin.String)/code">code</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Inspector</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>Evaluate a predicate.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="test-from-iterable.html">testFromIterable</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">testFromIterable</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$testFromIterable(kotlin.collections.MutableCollection((net.framework.api.rest.extension.ObjectInspector.Inspector.testFromIterable.E)), java.util.function.Predicate((net.framework.api.rest.extension.ObjectInspector.Inspector.testFromIterable.E)), kotlin.String)/target">target</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-collection/index.html"><span class="identifier">MutableCollection</span></a><span class="symbol">&lt;</span><a href="test-from-iterable.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$testFromIterable(kotlin.collections.MutableCollection((net.framework.api.rest.extension.ObjectInspector.Inspector.testFromIterable.E)), java.util.function.Predicate((net.framework.api.rest.extension.ObjectInspector.Inspector.testFromIterable.E)), kotlin.String)/predicate">predicate</span><span class="symbol">:</span>&nbsp;<span class="identifier">Predicate</span><span class="symbol">&lt;</span><a href="test-from-iterable.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$testFromIterable(kotlin.collections.MutableCollection((net.framework.api.rest.extension.ObjectInspector.Inspector.testFromIterable.E)), java.util.function.Predicate((net.framework.api.rest.extension.ObjectInspector.Inspector.testFromIterable.E)), kotlin.String)/code">code</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Inspector</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>Evaluate a predicate for an iterable.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="violate-max-length.html">violateMaxLength</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">V</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">violateMaxLength</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$violateMaxLength(net.framework.api.rest.extension.ObjectInspector.Inspector.violateMaxLength.V, kotlin.Int, kotlin.String)/target">target</span><span class="symbol">:</span>&nbsp;<a href="violate-max-length.html#V"><span class="identifier">V</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$violateMaxLength(net.framework.api.rest.extension.ObjectInspector.Inspector.violateMaxLength.V, kotlin.Int, kotlin.String)/max">max</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$violateMaxLength(net.framework.api.rest.extension.ObjectInspector.Inspector.violateMaxLength.V, kotlin.Int, kotlin.String)/code">code</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Inspector</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>桁数チェックを行い、上限を超えていればエラーコードを設定します。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="violate-specific-length.html">violateSpecificLength</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">V</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">violateSpecificLength</span><span class="symbol">(</span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$violateSpecificLength(net.framework.api.rest.extension.ObjectInspector.Inspector.violateSpecificLength.V, kotlin.Int, kotlin.String)/target">target</span><span class="symbol">:</span>&nbsp;<a href="violate-specific-length.html#V"><span class="identifier">V</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$violateSpecificLength(net.framework.api.rest.extension.ObjectInspector.Inspector.violateSpecificLength.V, kotlin.Int, kotlin.String)/length">length</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="net.framework.api.rest.extension.ObjectInspector.Inspector$violateSpecificLength(net.framework.api.rest.extension.ObjectInspector.Inspector.violateSpecificLength.V, kotlin.Int, kotlin.String)/code">code</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Inspector</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>桁数チェックを行い、指定された文字長でなければエラーコードを設定します。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

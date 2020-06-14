@@ -4,6 +4,7 @@ import net.framework.api.rest.model.Errors;
 import net.framework.api.rest.model.ServiceOut;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,8 +12,6 @@ import java.util.Optional;
  * The helper class for a service layer of DDD.
  * This class help programmer to handle service responses.
  * First of all, a target service class inherit this class, and call {@code doPipeServiceOut}.
- *
- *
  */
 public class ServiceHelper {
 
@@ -22,7 +21,7 @@ public class ServiceHelper {
 	 * @return the instance of ServiceOutBuilder, that has a generics of type T.
 	 */
 	protected static <T> ServiceOutBuilder<T> doPipeServiceOut() {
-		return new ServiceOutBuilder();
+		return new ServiceOutBuilder<>();
 	}
 
 	/**
@@ -31,7 +30,7 @@ public class ServiceHelper {
 	protected static class ServiceOutBuilder<T> {
 		private final T value;
 
-		private Errors errors;
+		private final Errors errors;
 
 		// デフォルトコンストラクタ禁止
 		private ServiceOutBuilder() {
@@ -46,17 +45,15 @@ public class ServiceHelper {
 		}
 
 		/**
-		 * Set and error.
+		 * Set error.
 		 * This is an intermediate operation.
 		 * @param code error codes or messages
 		 * @return ServiceOutBuilder
 		 */
 		public ServiceOutBuilder<T> setError(String code) {
-		    // エラーが初期化されていない場合、コードのリストを初期化する
+		    // If an error is not initialized, initialize an error
 		    Errors newErr = Optional.ofNullable(this.errors).orElse(new Errors());
-		    List<String> codes = new ArrayList();
-			codes.add(code);
-			newErr.setCodes(codes);
+			newErr.setCodes(new ArrayList<>(Arrays.asList(code)));
 			return new ServiceOutBuilder<>(this.value, newErr);
 		}
 
@@ -68,7 +65,7 @@ public class ServiceHelper {
 		public ServiceOutBuilder<T> setErrors(List<String> codes) {
 			// Initialize an error object.
 			Errors newErr = Optional.ofNullable(this.errors).orElse(new Errors());
-			newErr.setCodes(new ArrayList(codes));
+			newErr.setCodes(new ArrayList<>(codes));
 			return new ServiceOutBuilder<>(this.value, newErr);
 		}
 
