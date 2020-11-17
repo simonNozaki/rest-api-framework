@@ -1,5 +1,7 @@
 package net.framework.api.rest.extension;
 
+import java.util.Optional;
+
 /**
  * 文字列操作のユーティリティクラス。
  */
@@ -51,6 +53,15 @@ public class StringUtil {
      */
     public static String convertNullToEmpty(String s) {
         return s == null ? "" : s;
+    }
+
+    /**
+     * Return Optional of a string. If string is null or blank, this returns an empty Optional instance.
+     * @param string subject
+     * @return Optional
+     */
+    public static Optional<String> ofPresentable(String string) {
+        return Optional.ofNullable(string).filter(s -> !s.isEmpty());
     }
 
 }
