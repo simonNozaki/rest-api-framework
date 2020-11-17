@@ -55,5 +55,44 @@ class StringUtilTest {
         assertEquals(test, "")
     }
 
+    /**
+     * ofPresentable
+     */
+    @Test
+    fun test003_001() {
+        val optional = StringUtil.ofPresentable(null)
+        assertEquals(optional.isPresent, false);
+    }
+
+    /**
+     * ofPresentable
+     * blank
+     */
+    @Test
+    fun test003_002() {
+        val optional = StringUtil.ofPresentable("")
+        assertEquals(optional.isPresent, false);
+    }
+
+    /**
+     * ofPresentable
+     * full space
+     */
+    @Test
+    fun test003_003() {
+        val optional = StringUtil.ofPresentable("　")
+        assertEquals(optional.isPresent, true)
+    }
+
+    /**
+     * ofPresentable
+     * not blank
+     */
+    @Test
+    fun test003_004() {
+        val optional = StringUtil.ofPresentable("ofpresentable")
+        assertEquals(optional.isPresent, true)
+    }
+
 
 }
