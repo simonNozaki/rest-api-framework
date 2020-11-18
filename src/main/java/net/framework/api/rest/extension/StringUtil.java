@@ -5,7 +5,10 @@ import java.util.Optional;
 /**
  * 文字列操作のユーティリティクラス。
  */
-public class StringUtil {
+public final class StringUtil {
+
+    /** Default constructor */
+    private StringUtil() { }
 
     /**
      * 文字列の桁数チェックを実施します.

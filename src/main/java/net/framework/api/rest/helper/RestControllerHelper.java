@@ -1,6 +1,5 @@
 package net.framework.api.rest.helper;
 
-import net.framework.api.rest.model.AbstractErrors;
 import net.framework.api.rest.model.Errors;
 import net.framework.api.rest.model.ServiceOut;
 import net.framework.api.rest.config.AppLogger;
@@ -114,7 +113,7 @@ public class RestControllerHelper {
          * @param <U> generics
          * @return a ResponseProcessor instance
          */
-        public <U, R> ResponseProcessor<T> mapWithError(BiFunction<T, AbstractErrors, R> bifunction) {
+        public <U, R> ResponseProcessor<T> mapWithError(BiFunction<T, Errors, R> bifunction) {
             return new ResponseProcessor(bifunction.apply(value, errors));
         }
 
