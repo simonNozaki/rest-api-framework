@@ -16,8 +16,7 @@ We can feature mainly 3 functions:
 - Response Builder
 - a Web API client
 
-## Runtime
-Please check runtime versions.  
+## Requirements  
 - Java ... 11
 
 ## Installing

@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Common error object
  */
-public class Errors extends AbstractErrors {
+public class Errors {
 
 	/**
 	 * Default constructor
@@ -38,11 +38,10 @@ public class Errors extends AbstractErrors {
 		this.codes = codes;
 	}
 
-	@Override
 	public String getId() {
 		return id;
 	}
-	@Override
+
 	public void setId(String id) {
 		this.id = id;
 	}
