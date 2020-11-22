@@ -11,7 +11,10 @@ import java.util.stream.Stream;
 /**
  * オブジェクト操作のユーティリティクラス。
  */
-public class ObjectUtil {
+public final class ObjectUtil {
+
+    /** Default constructor */
+    private ObjectUtil() { }
 
     /**
      * オブジェクトの空、もしくはnullを検査します.
